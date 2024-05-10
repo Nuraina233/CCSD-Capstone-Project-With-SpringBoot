@@ -8,4 +8,12 @@ public class Stocks {
         this.stocks = stocks;
         this.size = size;
     }
+
+    public int getStocks() {
+        return stocks;
+    }
+
+    public int getSize() {
+        return size;
+    }
 }
