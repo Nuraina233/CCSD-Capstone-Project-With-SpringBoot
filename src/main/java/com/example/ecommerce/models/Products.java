@@ -1,45 +1,57 @@
 package com.example.ecommerce.models;
 
 public class Products {
-    private int product_id;
-    private String product_name;
-    private double product_price;
-    private String product_desc;
-    private String product_color;
-    private String product_category;
+    private int prodId;
+    private String prodName;
+    private String prodImage;
+    private double prodPrice;
+    private String prodDesc;
+    private String prodColor;
+    private String prodCategory;
+    private String prodGender;
 
     //constructor
-    public Products(int id, String name, double price, String desc, String color, String category){
-        this.product_id = id;
-        this.product_name = name;
-        this.product_price = price;
-        this.product_desc = desc;
-        this.product_color = color;
-        this.product_category = category;
+    public Products(int id, String name, String image, double price, String desc, String color, String category, String gender){
+        this.prodId = id;
+        this.prodName = name;
+        this.prodImage = image;
+        this.prodPrice = price;
+        this.prodDesc = desc;
+        this.prodColor = color;
+        this.prodCategory = category;
+        this.prodGender = gender;
     }
 
     //setter
-    public int getProduct_id(){
-        return product_id;
+    public int getProdId(){
+        return prodId;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProdName() {
+        return prodName;
     }
 
-    public double getProduct_price() {
-        return product_price;
+    public String getProdImage() {
+        return prodImage;
     }
 
-    public String getProduct_desc() {
-        return product_desc;
+    public double getProdPrice() {
+        return prodPrice;
     }
 
-    public String getProduct_color() {
-        return product_color;
+    public String getProdDesc() {
+        return prodDesc;
     }
 
-    public String getProduct_category() {
-        return product_category;
+    public String getProdColor() {
+        return prodColor;
+    }
+
+    public String getProdCategory() {
+        return prodCategory;
+    }
+
+    public String getProdGender() {
+        return prodGender;
     }
 }

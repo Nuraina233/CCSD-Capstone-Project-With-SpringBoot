@@ -1,4 +1,4 @@
-package com.example.ecommerce;
+package com.example.ecommerce.controller;
 
 import com.example.ecommerce.view.DisplayCustomer;
 import com.example.ecommerce.models.Customers;
@@ -31,6 +31,6 @@ public class CustomerController {
 //        }
 
         // Return the view name (HTML file)
-        return "customers";
+        return "badmin";
     }
 }
