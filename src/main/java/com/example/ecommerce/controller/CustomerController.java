@@ -31,6 +31,6 @@ public class CustomerController {
 //        }
 
         // Return the view name (HTML file)
-        return "customers";
+        return "badmin";
     }
 }

@@ -20,16 +20,14 @@
     <!--
         CSS
         ============================================= -->
-    <link rel="stylesheet" href="../static/linearicons.css">
-    <link rel="stylesheet" href="../static/owl.carousel.css">
-    <link rel="stylesheet" href="../static/themify-icons.css">
-    <link rel="stylesheet" href="../static/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/nice-select.css">
-    <link rel="stylesheet" href="../static/nouislider.min.css">
-    <link rel="stylesheet" href="../static/bootstrap.css">
-    <link rel="stylesheet" href="../static/main.css">
-
-
+    <link rel="stylesheet" href="../static/css/linearicons.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/nice-select.css">
+    <link rel="stylesheet" href="../static/css/nouislider.min.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/main.css">
 
 </head>
 
@@ -53,25 +51,25 @@
                     <ul class="nav navbar-nav menu_nav ml-auto">
                         <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
 
-<!--                        <li class="nav-item submenu dropdown">-->
-<!--                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
-<!--                               aria-expanded="false">Men</a>-->
-<!--                            <ul class="dropdown-menu">-->
-<!--                                <li class="nav-item"><a class="nav-link" href="category.html">Hiking</a></li>-->
-<!--                                <li class="nav-item"><a class="nav-link" href="category.html">Running</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
+                        <!--                        <li class="nav-item submenu dropdown">-->
+                        <!--                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
+                        <!--                               aria-expanded="false">Men</a>-->
+                        <!--                            <ul class="dropdown-menu">-->
+                        <!--                                <li class="nav-item"><a class="nav-link" href="category.html">Hiking</a></li>-->
+                        <!--                                <li class="nav-item"><a class="nav-link" href="category.html">Running</a></li>-->
+                        <!--                            </ul>-->
+                        <!--                        </li>-->
 
-<!--                        <li class="nav-item submenu dropdown">-->
-<!--                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
-<!--                               aria-expanded="false">Men</a>-->
-<!--                            <ul class="dropdown-menu">-->
-<!--                                <li class="nav-item"><a class="nav-link" href="category.html">Hiking</a></li>-->
-<!--                                <li class="nav-item"><a class="nav-link" href="category.html">Running</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
+                        <!--                        <li class="nav-item submenu dropdown">-->
+                        <!--                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
+                        <!--                               aria-expanded="false">Men</a>-->
+                        <!--                            <ul class="dropdown-menu">-->
+                        <!--                                <li class="nav-item"><a class="nav-link" href="category.html">Hiking</a></li>-->
+                        <!--                                <li class="nav-item"><a class="nav-link" href="category.html">Running</a></li>-->
+                        <!--                            </ul>-->
+                        <!--                        </li>-->
 
-<!--                        ORIGINAL-->
+                        <!--                        ORIGINAL-->
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                aria-expanded="false">Shop</a>
@@ -80,7 +78,7 @@
                                 <li class="nav-item"><a class="nav-link" href="#">Women</a></li>
                             </ul>
                         </li>
-<!--                        ORIGINAL-->
+                        <!--                        ORIGINAL-->
 
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -100,9 +98,9 @@
                                 <li class="nav-item"><a class="nav-link" href="#">Shopping Cart</a></li>
                             </ul>
                         </li>
-<!--                        <ul class="nav navbar-nav navbar-right">-->
-<!--                            <li class="nav-item"><a href="#" class="cart" ><img src="C:\Users\user\Documents\Coding\IntelliJ\Project\CCSD-Capstone-Project-With-SpringBoot\src\main\resources\Image\shopping_cart.png" alt="Cart" class="cart-icon" style="width: 30px; height: auto;"></span></a></li>-->
-<!--                        </ul>-->
+                        <!--                        <ul class="nav navbar-nav navbar-right">-->
+                        <!--                            <li class="nav-item"><a href="#" class="cart" ><img src="C:\Users\user\Documents\Coding\IntelliJ\Project\CCSD-Capstone-Project-With-SpringBoot\src\main\resources\Image\shopping_cart.png" alt="Cart" class="cart-icon" style="width: 30px; height: auto;"></span></a></li>-->
+                        <!--                        </ul>-->
                     </ul>
                 </div>
             </div>
@@ -111,19 +109,31 @@
 </header>
 <!-- End Header Area -->
 
-
-<!--================Login Box Area =================-->
 <section class="product_list_area section_gap">
     <div class="container" style="padding: 50px 0px">
-        <div class="row" >
+        <div class="row">
 
             <!-- Product List for Large Screens -->
             <div class="col-lg-12" th:each="customer : ${customers}">
                 <div class="card mb-3">
-                    <div class="card-body" >
-                        <h5 class="card-title" th:text="${customer.getfName()}"></h5>
-<!--                        <p class="card-text">Price: $<?php echo $product['price']; ?></p>-->
-<!--                        <p class="card-text"><?php echo $product['description']; ?></p>-->
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>First Name:</th>
+                                <td th:text="${customer.getfName()}"></td>
+                            </tr>
+                            <tr>
+                                <th>Last Name:</th>
+                                <td th:text="${customer.getlName()}"></td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td th:text="${customer.getEmail()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-primary" onclick="updateQuantity(1)">Edit</button>
                     </div>
                 </div>
             </div>
@@ -131,8 +141,6 @@
         </div>
     </div>
 </section>
-<!--================End Login Box Area =================-->
-
 
 
 <script src="template/js/vendor/jquery-2.2.4.min.js"></script>
@@ -144,7 +152,7 @@
 <script src="template/js/jquery.sticky.js"></script>
 <script src="template/js/nouislider.min.js"></script>
 <script src="template/js/jquery.magnific-popup.min.js"></script>
-<script src="template/js/owl.carousel.min.js"></script>
+<script src="/templates/template/js/owl.carousel.min.js"></script>
 <!--gmaps Js-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 <script src="template/js/gmaps.min.js"></script>
