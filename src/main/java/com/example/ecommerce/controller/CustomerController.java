@@ -1,4 +1,4 @@
-package com.example.ecommerce;
+package com.example.ecommerce.controller;
 
 import com.example.ecommerce.view.DisplayCustomer;
 import com.example.ecommerce.models.Customers;
@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 public class CustomerController {
 
-    @GetMapping
+    @GetMapping("/customer")
     public String getCustomers(Model model) throws SQLException {
 //        model.addAttribute("customers", "HELLO");
         // Retrieve the list of customers from the displayCustomer class
