@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karma Shop</title>
+    <style>
+        body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.navbar {
+background-color: #343a40;
+padding: 10px;
+}
+
+.navbar-brand {
+display: inline-block;
+vertical-align: middle;
+}
+
+.navbar-nav {
+display: inline-block;
+vertical-align: middle;
+}
+
+.nav-item {
+display: inline-block;
+margin-left: 20px;
+}
+
+.nav-link {
+color: #fff;
+text-decoration: none;
+}
+
+.card {
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
+}
+
+.card-body {
+padding: 20px;
+}
+
+.card-title {
+font-size: 20px;
+margin-bottom: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+.container {
+padding: 0 20px;
+}
+
+.navbar-brand,
+.navbar-nav,
+.nav-item {
+display: block;
+text-align: center;
+margin: 10px 0;
+}
+
+.nav-item {
+margin: 10px auto;
+}
+}
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- Start Header Area -->
+<header class="header_area sticky-header">
+    <div class="main_menu">
+        <nav>
+            <div class="container main_box">
+                <!-- Brand -->
+                <a class="navbar-brand logo_h" href="#"><img src="img/logo.png" alt=""></a>
+                <!-- Navigation Toggler -->
+                <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Navigation Links -->
+                <div class="navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Pages</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- End Header Area -->
+
+
+<!--================Login Box Area =================-->
+<section class="product_list_area section_gap">
+    <div class="container">
+        <div class="row">
+
+            <!-- Product List -->
+            <div class="col-lg-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Name</h5>
+                        <!-- <p class="card-text">Price: $<?php echo $product['price']; ?></p>
+                        <p class="card-text"><?php echo $product['description']; ?></p> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
+
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

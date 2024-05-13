@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Customers</title>
+</head>
+<body>
+<h1>List of Customers</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Phone</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of customers and display each customer -->
+<!--    <h1 th:text="${customers}"></h1>-->
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.getCustomer_id()}"></td>
+        <td th:text="${customer.getfName}"></td>
+        <td th:text="${customer.getlName}"></td>
+        <td th:text="${customer.getEmail}"></td>
+        <td th:text="${customer.getAddress}"></td>
+        <td th:text="${customer.getPhone}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

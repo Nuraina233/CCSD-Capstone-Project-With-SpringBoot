@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script id="s_turbo" src="https://animaapp.s3.amazonaws.com/static/turbo.es2017-umd.js"></script>
+  <script id="anima-overrides-script" src="overrides.js"></script>
+  <script src="https://animaapp.s3.amazonaws.com/js/timeline.js"></script>
+
+  <style>
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+  @import url("https://fonts.googleapis.com/css?family=Faster+One:400|Allerta:400|Inter:500,400,600|Katibeh:400");
+
+  /* The following line is used to measure usage of this code. You can remove it if you want. */
+  @import url("https://px.animaapp.com/66384f7c960f5d261e827d27.66384f7d960f5d261e827d2a.xhlVyRS.hch.png");
+
+
+  .screen textarea:focus,
+  .screen input:focus {
+    outline: none;
+  }
+
+  .screen * {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+  }
+
+  .screen div {
+    -webkit-text-size-adjust: none;
+  }
+
+  .component-wrapper a {
+    display: contents;
+    pointer-events: auto;
+    text-decoration: none;
+  }
+
+  .component-wrapper * {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+
+  .component-wrapper a *,
+  .component-wrapper input,
+  .component-wrapper video,
+  .component-wrapper iframe {
+    pointer-events: auto;
+  }
+
+  .component-wrapper.not-ready,
+  .component-wrapper.not-ready * {
+    visibility: hidden !important;
+  }
+
+  .screen a {
+    display: contents;
+    text-decoration: none;
+  }
+
+  .full-width-a {
+    width: 100%;
+  }
+
+  .full-height-a {
+    height: 100%;
+  }
+
+  .container-center-vertical {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .container-center-vertical > * {
+    flex-shrink: 0;
+    pointer-events: auto;
+  }
+
+  .container-center-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    pointer-events: none;
+    width: 100%;
+  }
+
+  .container-center-horizontal > * {
+    flex-shrink: 0;
+    pointer-events: auto;
+  }
+
+  .auto-animated div {
+    --z-index: -1;
+    opacity: 0;
+    position: absolute;
+  }
+
+  .auto-animated input {
+    --z-index: -1;
+    opacity: 0;
+    position: absolute;
+  }
+
+  .auto-animated .container-center-vertical,
+  .auto-animated .container-center-horizontal {
+    opacity: 1;
+  }
+
+  .overlay-base {
+    display: none;
+    height: 100%;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .overlay-base.animate-appear {
+    align-items: center;
+    animation: reveal 0.3s ease-in-out 1 normal forwards;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+  }
+
+  .overlay-base.animate-disappear {
+    animation: reveal 0.3s ease-in-out 1 reverse forwards;
+    display: block;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  .overlay-base.animate-disappear * {
+    pointer-events: none;
+  }
+
+  @keyframes reveal {
+    from { opacity: 0 }
+   to { opacity: 1 }
+  }
+
+  .animate-nodelay {
+    animation-delay: 0s;
+  }
+
+  .align-self-flex-start {
+    align-self: flex-start;
+  }
+
+  .align-self-flex-end {
+    align-self: flex-end;
+  }
+
+  .align-self-flex-center {
+    align-self: flex-center;
+  }
+
+  .valign-text-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .valign-text-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .listeners-active,
+  .listeners-active * {
+    pointer-events: auto;
+  }
+
+  .hidden,
+  .hidden * {
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .smart-layers-pointers,
+  .smart-layers-pointers * {
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .listeners-active-click,
+  .listeners-active-click * {
+    cursor: pointer;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  :root {
+    --black: #000000;
+    --gray: #828282;
+    --white: #ffffff;
+
+    --font-size-l: 25px;
+    --font-size-m: 20px;
+    --font-size-s: 16px;
+    --font-size-xl: 30px;
+    --font-size-xs: 15px;
+    --font-size-xxl: 40px;
+    --font-size-xxxl: 50px;
+
+    --font-family-allerta: "Allerta", Helvetica;
+    --font-family-faster_one: "Faster One", Helvetica;
+    --font-family-inter: "Inter", Helvetica;
+    --font-family-katibeh: "Katibeh", Helvetica;
+  }
+  .body-text {
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0px;
+  }
+
+  .heading {
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0px;
+  }
+
+  .katibeh-normal-black-40px {
+    color: var(--black);
+    font-family: var(--font-family-katibeh);
+    font-size: var(--font-size-xxl);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  :root {
+  }
+
+
+  /* screen - shop */
+      .shop {
+        background-color: var(--white);
+<!--          border: 100px solid;-->
+        border-color: var(--black);
+        height: 3220px;
+        overflow: hidden;
+        overflow-x: hidden;
+        position: relative;
+        width: 1358px;
+      }
+
+      .shop .product-home {
+        background-color: #11635e;
+        border-radius: 20px;
+        height: 670px;
+        left: 53px;
+        overflow: hidden;
+        position: absolute;
+        top: 164px;
+        width: 1249px;
+      }
+
+      .shop .header-with-image-xGHmn0 {
+        background-color: transparent;
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/header-with-image.svg);
+        background-position: 50% 50%;
+        background-size: cover;
+        border-radius: 8px;
+        box-shadow: 10px 20px 4px #00000033;
+        height: 593px;
+        left: 762px;
+        mix-blend-mode: normal;
+        overflow: hidden;
+        position: absolute;
+        top: 43px;
+        width: 422px;
+      }
+
+      .shop .copy-xGHmn0 {
+        align-items: center;
+        gap: 24px;
+        height: 309px;
+        left: 60px;
+        position: absolute;
+        top: 73px;
+        width: 671px;
+      }
+
+      .shop .title-HCf8CN {
+        -webkit-text-stroke: 0px var(--black);
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--black);
+        font-family: var(--font-family-faster_one);
+        font-size: 130px;
+        font-style: normal;
+        font-weight: 400;
+        height: 101px;
+        letter-spacing: 0.00px;
+        line-height: 195px;
+        margin-top: -1.00px;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .shop .boost-our-most-respo-HCf8CN {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--white);
+        font-family: var(--font-family-allerta);
+        font-size: var(--font-size-l);
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0.00px;
+        line-height: 37.5px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .button-HCf8CN {
+        box-shadow: 0px 4px 4px #00000040;
+      }
+
+      .shop .button-VvOv0x {
+        box-shadow: 0px 4px 4px #000000;
+      }
+
+      .shop .navigation-footer-Gd4xtk {
+        background-color: var(--white);
+        height: 313px;
+        left: 0px;
+        overflow: hidden;
+        position: absolute;
+        top: 2900px;
+        width: 1358px;
+      }
+
+      .shop .divider-uZ1hJx {
+        background-color: transparent;
+        height: 1px;
+        left: 39px;
+        object-fit: cover;
+        position: absolute;
+        top: 0px;
+        width: 1280px;
+      }
+
+      .shop .rectangle-2-uZ1hJx {
+        background-color: transparent;
+        height: 212px;
+        left: -3375px;
+        position: absolute;
+        top: -1047px;
+        width: 306px;
+      }
+
+      .shop .instagram-icon {
+        background-color: transparent;
+        height: 40px;
+        left: 465px;
+        object-fit: cover;
+        position: absolute;
+        top: 35px;
+        width: 40px;
+      }
+
+      .shop .facebook-icon {
+        background-color: transparent;
+        height: 40px;
+        left: 562px;
+        object-fit: cover;
+        position: absolute;
+        top: 35px;
+        width: 40px;
+      }
+
+      .shop .youtube-icon {
+        background-color: transparent;
+        height: 40px;
+        left: 659px;
+        object-fit: cover;
+        position: absolute;
+        top: 35px;
+        width: 40px;
+      }
+
+      .shop .frame-1321316145-uZ1hJx {
+        background-color: #eae4e4;
+        border-radius: 30px;
+        box-shadow: 0px 4px 4px #00000040;
+        height: 178px;
+        left: 48px;
+        overflow: hidden;
+        position: absolute;
+        top: 100px;
+        width: 668px;
+      }
+
+      .shop .map-1-Uk6BsA {
+        background-color: transparent;
+        height: 158px;
+        left: 10px;
+        object-fit: cover;
+        position: absolute;
+        top: 10px;
+        width: 648px;
+      }
+
+      .shop .ecom-wizards-footer {
+        font-family: var(--font-family-katibeh);
+        font-size: var(--font-size-xxxl);
+        font-weight: 400;
+        height: 75px;
+        left: 80px;
+        letter-spacing: 5.00px;
+        line-height: 75px;
+        top: 10px;
+      }
+
+      .shop .faq-uZ1hJx {
+        background-color: transparent;
+        height: 60px;
+        left: 1011px;
+        letter-spacing: 4.00px;
+        line-height: 60px;
+        position: absolute;
+        text-align: center;
+        text-decoration: none;
+        top: 226px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .shop .customer-review-uZ1hJx {
+        background-color: transparent;
+        height: 60px;
+        left: 903px;
+        letter-spacing: 4.00px;
+        line-height: 60px;
+        position: absolute;
+        text-align: center;
+        text-decoration: none;
+        top: 164px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .shop .customer-support-uZ1hJx {
+        background-color: transparent;
+        height: 60px;
+        left: 895px;
+        letter-spacing: 4.00px;
+        line-height: 60px;
+        position: absolute;
+        text-align: center;
+        text-decoration: none;
+        top: 102px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .shop .about-us {
+        background-color: transparent;
+        height: 60px;
+        left: 971px;
+        letter-spacing: 4.00px;
+        line-height: 60px;
+        position: absolute;
+        text-align: center;
+        text-decoration: none;
+        top: 40px;
+        white-space: nowrap;
+        width: auto;
+      }
+
+<!--        .shop .kid-frame-Gd4xtk {-->
+<!--          background-color: transparent;-->
+<!--          height: 965px;-->
+<!--          left: -14px;-->
+<!--          overflow: hidden;-->
+<!--          position: absolute;-->
+<!--          top: 2871px;-->
+<!--          width: 1332px;-->
+<!--        }-->
+
+      .shop .card-list-wSWHDG {
+        left: 80px;
+      }
+
+      .shop .card-ogxsEo {
+        align-self: stretch;
+        width: 100%;
+      }
+
+      .shop .image-8veTp3 {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-7.svg);
+      }
+
+      .shop .copy-8veTp3 {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .card-xenzqx {
+        align-self: stretch;
+        width: 100%;
+      }
+
+      .shop .image-uFQzhw {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-3.svg);
+      }
+
+      .shop .copy-uFQzhw {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .card-big-wSWHDG {
+        left: 644px;
+      }
+
+      .shop .image-6qJxdy {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image.svg);
+      }
+
+      .shop .copy-6qJxdy {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+<!--        .shop .kids-wSWHDG {-->
+<!--          font-weight: 600;-->
+<!--          height: auto;-->
+<!--          left: 80px;-->
+<!--          line-height: 44.0px;-->
+<!--          position: absolute;-->
+<!--          top: -1px;-->
+<!--          width: 742px;-->
+<!--        }-->
+
+      .shop .see-more-women-wSWHDG {
+        align-items: center;
+        background-color: #bbd3d7;
+        border: 0px none;
+        border-radius: 8px;
+        box-shadow: 0px 3px 2px #00000080;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        left: 621px;
+        padding: 14px 24px;
+        position: absolute;
+        top: 901px;
+        width: 199px;
+      }
+
+      .shop .women-frame-Gd4xtk {
+        background-color: transparent;
+        height: 959px;
+        left: -14px;
+        overflow: hidden;
+        position: absolute;
+        top: 1879px;
+        width: 1332px;
+      }
+
+      .shop .card-list-cgyjLU {
+        left: 847px;
+      }
+
+      .shop .card-6nSAxv {
+        align-self: stretch;
+        width: 100%;
+      }
+
+      .shop .image-4SGsG2 {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-8.svg);
+      }
+
+      .shop .copy-4SGsG2 {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .card-K8Y8AH {
+        align-self: stretch;
+        width: 100%;
+      }
+
+      .shop .image-NGNkG3 {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-4.svg);
+      }
+
+      .shop .copy-NGNkG3 {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .card-big-cgyjLU {
+        left: 80px;
+      }
+
+      .shop .image-p5MzZz {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-1.svg);
+      }
+
+      .shop .copy-p5MzZz {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .women-cgyjLU {
+        font-weight: 600;
+        height: auto;
+        left: 80px;
+        line-height: 44.0px;
+        position: absolute;
+        top: -1px;
+        width: 742px;
+      }
+
+      .shop .see-more-women-cgyjLU {
+        background-color: transparent;
+        height: 56px;
+        left: 620px;
+        position: absolute;
+        top: 902px;
+        width: 201px;
+      }
+
+      .shop .men-frame-Gd4xtk {
+        background-color: transparent;
+        height: 924px;
+        left: -14px;
+        overflow: hidden;
+        position: absolute;
+        top: 922px;
+        width: 1332px;
+      }
+
+      .shop .card-grid-m11PxH {
+        align-items: flex-end;
+        background-color: transparent;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px 32px;
+        justify-content: space-between;
+        left: 80px;
+        position: absolute;
+        top: 76px;
+        width: 1282px;
+      }
+
+      .shop .card-1qcN4w {
+        width: 404px;
+      }
+
+      .shop .image-ovRHqb {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-9.svg);
+      }
+
+      .shop .copy-ovRHqb {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .description-of-first-product-vlz5mP {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--gray);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .card-SKdLEC {
+        width: 404px;
+      }
+
+      .shop .image-Ffx9Js {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-6.svg);
+      }
+
+      .shop .copy-Ffx9Js {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .description-of-second-product-2Ku0VX {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--gray);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .card-moWFGJ {
+        width: 404px;
+      }
+
+      .shop .image-CdSoXy {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-11.svg);
+      }
+
+      .shop .copy-CdSoXy {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .description-of-third-product-n2SEh7 {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--gray);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .card-lz3DAq {
+        width: 404px;
+      }
+
+      .shop .image-HlSRuC {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-5.svg);
+      }
+
+      .shop .copy-HlSRuC {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .description-of-fourth-product-lyp2A3 {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--gray);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .card-Y1Z4AG {
+        width: 404px;
+      }
+
+      .shop .image-J5SDxC {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-10.svg);
+      }
+
+      .shop .copy-J5SDxC {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .description-of-fifth-product-i0LBeq {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--gray);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .card-8ILjLK {
+        width: 404px;
+      }
+
+      .shop .image-OxJ2MX {
+        background-image: url(https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/image-2.svg);
+      }
+
+      .shop .copy-OxJ2MX {
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 0 0 auto;
+        gap: 4px;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .description-of-sixth-product-BV0x3E {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--gray);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .men-m11PxH {
+        font-weight: 600;
+        height: auto;
+        left: 81px;
+        line-height: 44.0px;
+        position: absolute;
+        top: -1px;
+        width: 755px;
+      }
+
+      .shop .see-more-men-m11PxH {
+        align-items: center;
+        background-color: #bad3d6;
+        border: 0px none;
+        border-radius: 8px;
+        box-shadow: 0px 3px 2px #00000080;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        left: 621px;
+        padding: 14px 24px;
+        position: absolute;
+        top: 871px;
+        width: 199px;
+      }
+
+      .shop .navigation-Gd4xtk {
+        background-color: var(--white);
+        height: 164px;
+        left: 0px;
+        overflow: hidden;
+        position: absolute;
+        top: 0px;
+        width: 1356px;
+      }
+
+      .shop .items-uRdukR {
+        box-shadow: 0px 0px 0px #00000040;
+        display: flex;
+        left: 926px;
+        top: 50px;
+        width: 361px;
+      }
+
+      .shop .shopping_cart-1-IulDNc {
+        background-color: transparent;
+        height: 30px;
+        object-fit: cover;
+        position: relative;
+        width: 30px;
+      }
+
+      .shop .profile-IulDNc {
+        align-items: center;
+        background-color: transparent;
+        display: inline-flex;
+        flex: 0 0 auto;
+        gap: 24px;
+        position: relative;
+      }
+
+      .shop .avatar-hY1XsS {
+        background-color: transparent;
+        height: 72px;
+        margin-bottom: -8.00px;
+        margin-left: -4.00px;
+        margin-right: -4.00px;
+        position: relative;
+        width: 72px;
+      }
+
+      .shop .ecom-wizards-header {
+        font-family: var(--font-family-katibeh);
+        font-size: 40px;
+        font-weight: 500;
+        height: 45px;
+        left: 56px;
+        letter-spacing: 0.00px;
+        line-height: 45px;
+        top: 52px;
+      }
+
+      .shop .items-0C6xpF {
+        display: inline-flex;
+        left: 294px;
+        top: 67px;
+      }
+
+      .shop .home-T2mOXN {
+        background-color: transparent;
+        color: var(--black);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        margin-top: -1.00px;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+        width: fit-content;
+      }
+
+      .shop .men-T2mOXN {
+        font-weight: 500;
+        line-height: 30px;
+        margin-top: -1.00px;
+        position: relative;
+        white-space: nowrap;
+        width: fit-content;
+      }
+
+      .shop .women-T2mOXN {
+        font-weight: 500;
+        line-height: 30px;
+        margin-top: -1.00px;
+        position: relative;
+        white-space: nowrap;
+        width: fit-content;
+      }
+
+<!--        .shop .kids-T2mOXN {-->
+<!--          font-weight: 500;-->
+<!--          line-height: 30px;-->
+<!--          margin-top: -1.00px;-->
+<!--          position: relative;-->
+<!--          white-space: nowrap;-->
+<!--          width: fit-content;-->
+<!--        }-->
+
+      .shop .button {
+        align-items: center;
+        background-color: #80c8f1;
+        border-radius: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 8px;
+        justify-content: center;
+        left: 0px;
+        overflow: hidden;
+        padding: 14px 24px;
+        position: absolute;
+        top: 227px;
+        width: 127px;
+      }
+
+      .shop .card {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        height: 366px;
+        position: relative;
+      }
+
+      .shop .card-big {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        height: 764px;
+        position: absolute;
+        top: 76px;
+        width: 735px;
+      }
+
+      .shop .card-list {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        position: absolute;
+        top: 76px;
+        width: 515px;
+      }
+
+      .shop .copy {
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .shop .description-of-featured-product {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--gray);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .description-of-lower-product {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--gray);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .description-of-top-product {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--gray);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .ecom-wizards {
+        background-color: transparent;
+        color: var(--black);
+        font-style: normal;
+        position: absolute;
+        text-align: left;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .shop .featured-product {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--black);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        margin-top: -1.00px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .image {
+        align-self: stretch;
+        background-color: transparent;
+        background-position: 50% 50%;
+        background-size: cover;
+        border-radius: 8px;
+        flex: 1;
+        flex-grow: 1;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+      }
+
+      .shop .items {
+        align-items: center;
+        background-color: transparent;
+        gap: 48px;
+        justify-content: flex-end;
+        position: absolute;
+      }
+
+<!--        .shop .kids {-->
+<!--          background-color: transparent;-->
+<!--          color: var(&#45;&#45;black);-->
+<!--          font-style: normal;-->
+<!--          text-align: left;-->
+<!--        }-->
+
+      .shop .men {
+        background-color: transparent;
+        color: var(--black);
+        font-style: normal;
+        text-align: left;
+      }
+
+      .shop .product {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--black);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        margin-top: -1.00px;
+        position: relative;
+        text-align: left;
+      }
+
+      .shop .see-more {
+        background-color: transparent;
+        color: var(--black);
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-xs);
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 3.00px;
+        line-height: 22.5px;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+        width: fit-content;
+      }
+
+      .shop .shop-now {
+        -webkit-text-stroke: 1px var(--black);
+        background-color: transparent;
+        color: #2d1212;
+        font-family: var(--font-family-inter);
+        font-size: var(--font-size-s);
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: 0.00px;
+        line-height: 24px;
+        margin-left: -1.00px;
+        margin-top: -2.00px;
+        position: relative;
+        text-align: left;
+        text-shadow: 0px 4px 4px #00000040;
+        white-space: nowrap;
+        width: fit-content;
+      }
+
+      .shop .women {
+        background-color: transparent;
+        color: var(--black);
+        font-style: normal;
+        text-align: left;
+      }
+
+      .shop .price {
+        align-self: stretch;
+        background-color: transparent;
+        color: var(--black);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        position: relative;
+        text-align: left;
+      }
+</style>
+
+  <meta charset="UTF-8">
+  <title>Homepage</title>
+</head>
+
+<body style="margin: 0px; background: rgb(255, 255, 255); overflow-x: hidden;" dark-scroll="">
+<input type="hidden" id="anPageName" name="page" value="shop">
+<div class="container-center-horizontal">
+  <div class="shop screen " data-id="33:26">
+    <div class="product-home" data-id="33:113">
+      <div class="header-with-image-xGHmn0" data-id="33:87-67a3bd03-0430-49ad-ade8-089f0419206d"></div>
+      <div class="copy-xGHmn0 copy" data-id="33:88">
+        <h1 class="title-HCf8CN valign-text-middle" data-id="53:63">ADIDAS</h1>
+        <p class="boost-our-most-respo-HCf8CN valign-text-middle" data-id="33:90">BOOST - OUR MOST RESPONSIVE CUSHIONING EVER.<br>THE MORE ENERGY YOU GIVE, THE MORE YOU GET</p>
+        <div class="button-HCf8CN button" data-id="33:91">
+          <div class="shop-now valign-text-middle" data-id="33:92">Shop Now</div>
+        </div>
+        <div class="button-VvOv0x button" data-id="53:64">
+          <div class="shop-now valign-text-middle" data-id="53:65">Shop Now</div>
+        </div>
+      </div>
+    </div>
+    <div class="navigation-footer-Gd4xtk" data-id="33:108">
+      <img class="divider-uZ1hJx" data-id="33:109" src="https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/divider.svg"  alt="Divider">
+      <img class="rectangle-2-uZ1hJx" data-id="33:110" src="C:\Users\user\Documents\Coding\IntelliJ\Project\Image\rectangle.png" alt="Rectangle">
+      <img class="instagram-icon" data-id="51:48" src="C:\Users\user\Documents\Coding\IntelliJ\Project\Image\instagram.png" alt="instagram">
+      <img class="facebook-icon" data-id="51:47" src="C:\Users\user\Documents\Coding\IntelliJ\Project\Image\facebook.png" alt="facebook">
+      <img class="youtube-icon" data-id="51:49" src="C:\Users\user\Documents\Coding\IntelliJ\Project\Image\youtube.png" alt="youtube">
+      <div class="frame-1321316145-uZ1hJx" data-id="53:53">
+        <img class="map-1-Uk6BsA" data-id="53:50" src="https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/map-1.png" alt="map 1">
+      </div>
+      <a href="https://start.spring.io/;"><div class="ecom-wizards-footer valign-text-middle ecom-wizards" data-id="53:54">Ecom Wizards</div></a>
+      <div class="faq-uZ1hJx valign-text-middle katibeh-normal-black-40px" data-id="53:60">FAQ</div>
+      <div class="customer-review-uZ1hJx valign-text-middle katibeh-normal-black-40px" data-id="53:58">Customer Review</div>
+      <div class="customer-support-uZ1hJx valign-text-middle katibeh-normal-black-40px" data-id="53:59">Customer Support</div>
+      <div class="about-us valign-text-middle katibeh-normal-black-40px" data-id="53:56">About us</div>
+    </div>
+    <!--                <div class="kid-frame-Gd4xtk" data-id="51:7">-->
+    <!--                    <div class="card-list-wSWHDG card-list" data-id="51:8">-->
+    <!--                        <div class="card-ogxsEo card" data-id="51:9">-->
+    <!--                            <div class="image-8veTp3 image" data-id="51:10-6c40cbee-1d3d-4804-979e-6d78d5fedba9"></div>-->
+    <!--                            <div class="copy-8veTp3 copy" data-id="51:11"><div class="product body-text" data-id="51:12">Product</div>-->
+    <!--                                <div class="description-of-top-product valign-text-middle body-text" data-id="51:13">Description of top product</div>-->
+    <!--                                <div class="price body-text" data-id="51:14">$10.99</div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                        <div class="card-xenzqx card" data-id="51:15">-->
+    <!--                            <div class="image-uFQzhw image" data-id="51:16-7f235de1-3ef8-4ba3-b1bf-981376a0e06c"></div>-->
+    <!--                            <div class="copy-uFQzhw copy" data-id="51:17"><div class="product body-text" data-id="51:18">Product</div>-->
+    <!--                                <div class="description-of-lower-product valign-text-middle body-text" data-id="51:19">Description of lower product</div>-->
+    <!--                                <div class="price body-text" data-id="51:20">$10.99</div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                    <div class="card-big-wSWHDG card-big" data-id="51:21">-->
+    <!--                        <div class="image-6qJxdy image" data-id="51:22-818315f0-4768-4e53-a60d-4a19b3233d33"></div>-->
+    <!--                        <div class="copy-6qJxdy copy" data-id="51:23"><div class="featured-product body-text" data-id="51:24">Featured product</div>-->
+    <!--                            <div class="description-of-featured-product valign-text-middle body-text" data-id="51:25">Description of featured product</div>-->
+    <!--                            <div class="price body-text" data-id="51:26">$10.99</div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                    <div class="kids-wSWHDG kids heading" data-id="51:27">Kids</div>-->
+    <!--                    <div class="see-more-women-wSWHDG" data-id="51:45">-->
+    <!--                        <div class="see-more valign-text-middle" data-id="51:46">See More</div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <div class="women-frame-Gd4xtk" data-id="51:3">
+      <div class="card-list-cgyjLU card-list" data-id="33:27">
+        <div class="card-6nSAxv card" data-id="33:28">
+          <div class="image-4SGsG2 image" data-id="33:29-6b77fab1-472c-41db-9734-eccbc017582b"></div>
+          <div class="copy-4SGsG2 copy" data-id="33:30">
+            <div class="product body-text" data-id="33:31">Product</div>
+            <div class="description-of-top-product valign-text-middle body-text" data-id="33:32">Description of top product</div>
+            <div class="price body-text" data-id="33:33">$10.99</div>
+          </div>
+        </div>
+        <div class="card-K8Y8AH card" data-id="33:34">
+          <div class="image-NGNkG3 image" data-id="33:35-a8fc781a-7576-4752-98db-a24227a78b9a"></div>
+          <div class="copy-NGNkG3 copy" data-id="33:36">
+            <div class="product body-text" data-id="33:37">Product</div>
+            <div class="description-of-lower-product valign-text-middle body-text" data-id="33:38">Description of lower product</div>
+            <div class="price body-text" data-id="33:39">$10.99</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-big-cgyjLU card-big" data-id="33:40">
+        <div class="image-p5MzZz image" data-id="33:41-f1c9610a-136c-4696-aeeb-ef54123e2002"></div>
+        <div class="copy-p5MzZz copy" data-id="33:42">
+          <div class="featured-product body-text" data-id="33:43">Featured product</div>
+          <div class="description-of-featured-product valign-text-middle body-text" data-id="33:44">Description of featured product</div>
+          <div class="price body-text" data-id="33:45">$10.99</div>
+        </div>
+      </div>
+      <div class="women-cgyjLU women heading" data-id="33:48">Women</div>
+      <img class="see-more-women-cgyjLU" data-id="51:43" src="https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/see-more-women.png" alt="See more women">
+    </div>
+    <div class="men-frame-Gd4xtk" data-id="51:4">
+      <div class="card-grid-m11PxH" data-id="33:49">
+        <div class="card-1qcN4w card" data-id="33:50">
+          <div class="image-ovRHqb image" data-id="33:51-974967ce-74fa-4239-bce1-7818af2a66ea"></div>
+          <div class="copy-ovRHqb copy" data-id="33:52">
+            <div class="product body-text" data-id="33:53">Product</div>
+            <div class="description-of-first-product-vlz5mP valign-text-middle body-text" data-id="33:54">Description of first product</div>
+            <div class="price body-text" data-id="33:55">$10.99</div>
+          </div>
+        </div>
+        <div class="card-SKdLEC card" data-id="33:56">
+          <div class="image-Ffx9Js image" data-id="33:57-da218e8f-5a27-40cd-a860-3a925de5e96a"></div>
+          <div class="copy-Ffx9Js copy" data-id="33:58">
+            <div class="product body-text" data-id="33:59">Product</div>
+            <div class="description-of-second-product-2Ku0VX valign-text-middle body-text" data-id="33:60">Description of second product</div>
+            <div class="price body-text" data-id="33:61">$10.99</div>
+          </div>
+        </div>
+        <div class="card-moWFGJ card" data-id="33:62">
+          <div class="image-CdSoXy image" data-id="33:63-43a440e5-7bda-4b32-a558-0a92b4be2f8d"></div>
+          <div class="copy-CdSoXy copy" data-id="33:64">
+            <div class="product body-text" data-id="33:65">Product</div>
+            <div class="description-of-third-product-n2SEh7 valign-text-middle body-text" data-id="33:66">Description of third product</div>
+            <div class="price body-text" data-id="33:67">$10.99</div>
+          </div>
+        </div>
+        <div class="card-lz3DAq card" data-id="33:68">
+          <div class="image-HlSRuC image" data-id="33:69-d296fac3-7c5d-41e1-ba90-82aaf0e8f0bf"></div>
+          <div class="copy-HlSRuC copy" data-id="33:70">
+            <div class="product body-text" data-id="33:71">Product</div>
+            <div class="description-of-fourth-product-lyp2A3 valign-text-middle body-text" data-id="33:72">Description of fourth product</div>
+            <div class="price body-text" data-id="33:73">$10.99</div>
+          </div>
+        </div>
+        <div class="card-Y1Z4AG card" data-id="33:74">
+          <div class="image-J5SDxC image" data-id="33:75-44df1b83-f948-4be6-8ba2-324c14bb842c"></div>
+          <div class="copy-J5SDxC copy" data-id="33:76">
+            <div class="product body-text" data-id="33:77">Product</div>
+            <div class="description-of-fifth-product-i0LBeq valign-text-middle body-text" data-id="33:78">Description of fifth product</div>
+            <div class="price body-text" data-id="33:79">$10.99</div>
+          </div>
+        </div>
+        <div class="card-8ILjLK card" data-id="33:80">
+          <div class="image-OxJ2MX image" data-id="33:81-da542efc-76ae-4f0d-a105-5c1c6e707ea6"></div>
+          <div class="copy-OxJ2MX copy" data-id="33:82">
+            <div class="product body-text" data-id="33:83">Product</div>
+            <div class="description-of-sixth-product-BV0x3E valign-text-middle body-text" data-id="33:84">Description of sixth product</div>
+            <div class="price body-text" data-id="33:85">$10.99</div>
+          </div>
+        </div>
+      </div>
+      <div class="men-m11PxH men heading" data-id="33:86">Men</div>
+      <div class="see-more-men-m11PxH" data-id="51:5">
+        <div class="see-more valign-text-middle" data-id="51:6">See More</div>
+      </div>
+    </div>
+    <div class="navigation-Gd4xtk" data-id="33:94">
+      <div class="items-uRdukR items" data-id="33:95">
+        <img class="shopping_cart-1-IulDNc" data-id="33:96" src="https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/shopping-cart-1.png" anima-src="https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/shopping-cart-1.png" alt="shopping_cart 1">
+        <div class="profile-IulDNc" data-id="33:97">
+          <img class="avatar-hY1XsS" data-id="33:100" src="https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/avatar.png" anima-src="https://cdn.animaapp.com/projects/66384f7e960f5d261e827d2c/releases/66384fb223b0f22df239a2e3/img/avatar.png" alt="Avatar"></div>
+      </div>
+      <div class="ecom-wizards-header valign-text-middle ecom-wizards" data-id="33:102">Ecom Wizards</div>
+      <div class="items-0C6xpF items" data-id="33:103">
+        <div class="home-T2mOXN valign-text-middle body-text" data-id="33:104">Home</div>
+        <div class="men-T2mOXN valign-text-middle men body-text" data-id="33:105">Men</div>
+        <div class="women-T2mOXN valign-text-middle women body-text" data-id="33:106">Women</div>
+        <div class="kids-T2mOXN valign-text-middle kids body-text" data-id="33:107">Kids</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="launchpad-js/launchpad-banner.js" async=""></script>
+<script defer="" src="https://animaapp.s3.amazonaws.com/static/restart-btn.min.js"></script>
+
+<div id="anima-interface" data-turbo-permanent="true" class="idle"><!---->
+  <div class="omniview-anima-action-links" id="actions-wrap">
+    <div class="omniview-anima-action-links">
+      <div id="page-nav" class="link navigation" style="display: none;">
+        <svg id="homepage-icon" class="home-icon" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8.151 11a.25.25 0 01-.167-.436l4.349-3.913a.25.25 0 01.334 0l4.349 3.913a.25.25 0 01-.167.436H8.15zM16 12H9v4a1 1 0 001 1h5a1 1 0 001-1v-4z" fill="#fff"></path>
+        </svg>
+
+        <svg class="icon" id="arrow-left" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+
+        <span id="page-num"></span>
+
+        <svg class="icon" id="arrow-right" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+
+      <a class="link" id="comment-link" target="_blank" style="display: none;">
+        <span class="text">Comment</span>
+        <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M4.301 15.137a.551.551 0 01.199-.55c.314-.23.554-.554.718-.965A6.015 6.015 0 014 10 6.006 6.006 0   0110.001 4 6.006 6.006 0 0116 10.001 6.006 6.006 0 019.999 16a5.98 5.98 0 01-3.095-.86 3.165 3.165 0 01-1.65.438 3.6  3.6 0 01-.57-.044c-.191-.03-.34-.186-.383-.397z" fill="#fff"></path>
+        </svg>
+      </a>
+
+      <a class="link" id="code-link" target="_blank" style="display: none;">
+        <span class="text">Get Code</span>
+        <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 15.667a1 1 0 01-.707-1.708l3.626-3.625-3.626-3.626a1 1 0 111.415-1.415l4.333 4.333a1 1 0 010 1.414l-4.333 4.333a.993.993 0 01-.707.294zM7.333 5a1 1 0 01.707 1.708l-3.626 3.625 3.627 3.626a1 1 0 11-1.415 1.415L2.293 11.04a1 1 0 010-1.415l4.333-4.333A.992.992 0 017.333 5z" fill="#fff"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+<div id="anima-watermark" class="idle" style="display: none;"><!---->
+  <a id="anima-watermark-link" target="_blank" href="https://www.animaapp.com?utm_campaign=public-link-banner&amp;utm_medium=public-link-banner&amp;utm_source=animaapp.io" style="right: 20px; left: auto; padding: 6px;">
+    <svg width="20" height="20" viewBox="0 0 20 20" id="anima-logo-icon" fill="none" xmlns="http://www.w3.org/2000/svg" data-hotspot-id="hp-0">
+      <path d="M4.09293 3.00001H16.5327C16.5484 2.99976 16.5638 3.00351 16.5776 3.01092C16.5913 3.01832 16.603 3.02913 16.6114 3.04231C16.6198 3.0555 16.6247 3.07061 16.6256 3.08622C16.6265 3.10182 16.6233 3.1174 16.6165 3.13146C15.5441 5.29706 13.9276 7.14699 11.9253 8.50009C8.69117 10.6822 5.43436 10.9075 4.09389 10.9196C4.08165 10.9198 4.06949 10.9176 4.05811 10.9131C4.04672 10.9086 4.03636 10.9019 4.02761 10.8933C4.01887 10.8848 4.01192 10.8745 4.00718 10.8633C4.00244 10.852 4 10.8399 4 10.8276V3.09198C4 3.07982 4.00241 3.06778 4.00709 3.05656C4.01177 3.04534 4.01863 3.03516 4.02728 3.02661C4.03592 3.01805 4.04617 3.0113 4.05744 3.00673C4.06871 3.00217 4.08077 2.99988 4.09293 3.00001Z" fill="#FF6250"></path>
+      <path d="M6.77772 17.4446C8.31182 17.4446 9.55545 16.201 9.55545 14.6669C9.55545 13.1328 8.31182 11.8892 6.77772 11.8892C5.24363 11.8892 4 13.1328 4 14.6669C4 16.201 5.24363 17.4446 6.77772 17.4446Z" fill="#FFDF90"></path>
+      <path d="M12.4559 17.2799C11.6701 16.9799 11.2522 16.1151 11.5185 15.3496L13.6153 9.3656C13.884 8.60003 14.7387 8.22302 15.5245 8.52299C16.3103 8.82344 16.7282 9.68772 16.4619 10.4538L14.365 16.4377C14.0964 17.2033 13.2417 17.5808 12.4559 17.2799Z" fill="#3366FF"></path>
+    </svg>
+    <span class="text" style="display: none;">Made with Anima</span>
+  </a>
+</div>
+<div id="hotspots_wrapper">
+  <div class="hotspot" id="hp-0" style="top: 0px; left: 0px; z-index: -1; opacity: 0;"></div>
+</div>
+<div id="t_preload_links"><link href="/shop" rel="prefetch"></div>
+</body>
+</html>
