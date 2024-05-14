@@ -22,7 +22,7 @@ public class Products {
         this.prodGender = gender;
     }
 
-    //setter
+    //getter method
     public int getProdId(){
         return prodId;
     }
