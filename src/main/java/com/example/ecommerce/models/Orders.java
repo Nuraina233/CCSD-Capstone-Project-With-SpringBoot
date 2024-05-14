@@ -1,13 +1,19 @@
 package com.example.ecommerce.models;
 
 public class Orders {
+    private int orderId;
+    private int prodID;
+    private int paymentID;
     private Products products;
-    private double size;
+//    private double size;
     private int prodQuantity;
 
-    public Orders(Products products, double size, int prodQuantity){
-        this.products = products;
-        this.size = size;
+    public Orders(int orderId, int prodID, int prodQuantity, int paymentID/*, Products products, double size*/){
+        this.orderId = orderId;
+        this.prodID = prodID;
+        this.paymentID = paymentID;
+        //this.products = products;
+        //this.size = size;
         this.prodQuantity = prodQuantity;
     }
 
@@ -19,12 +25,20 @@ public class Orders {
         this.products = products;
     }
 
-    public double getSize() {
-        return size;
+//    public double getSize() {
+//        return size;
+//    }
+//
+//    public void setSize(double size) {
+//        this.size = size;
+//    }
+
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setSize(double size) {
-        this.size = size;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public int getProdQuantity() {
