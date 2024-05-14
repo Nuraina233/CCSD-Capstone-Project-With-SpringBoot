@@ -58,10 +58,11 @@ public class DisplayReview {
                 Reviews reviews = new Reviews(review_id,  rating, comment, customer_id, product_id);
                 reviewsList.add(reviews);
 
-                System.out.println(resultSet.getInt("payment_id") +  "\t" +
-                        resultSet.getInt("order_id") + "\t" +
-                        resultSet.getString("payment_method") + "\t" +
-                        resultSet.getDouble("total_price"));
+                System.out.println(resultSet.getInt("review_id") +  "\t" +
+                        resultSet.getInt("customer_id") + "\t" +
+                        resultSet.getInt("product_id") + "\t" +
+                        resultSet.getInt("rating") + "\t" +
+                        resultSet.getString("comment"));
             }
 
             System.out.println(reviewsList);
