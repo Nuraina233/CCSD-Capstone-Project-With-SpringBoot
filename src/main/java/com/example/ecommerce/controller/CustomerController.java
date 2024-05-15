@@ -1,77 +1,36 @@
 package com.example.ecommerce.controller;
 
-
-import com.example.ecommerce.entity.Customer;
-import com.example.ecommerce.service.CustomerService;
+import com.example.ecommerce.view.DisplayCustomer;
+import com.example.ecommerce.models.Customers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+
+import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class CustomerController {
 
-    private CustomerService customerService;
+    @GetMapping("/customer")
+    public String getCustomers(Model model) throws SQLException {
+//        model.addAttribute("customers", "HELLO");
+        // Retrieve the list of customers from the displayCustomer class
+        List<Customers> customers = DisplayCustomer.getCustomersList();
 
-    public CustomerController(CustomerService customerService){
-        super();
-        this.customerService = customerService;
-    }
+        // Add the list of customers to the model
+        model.addAttribute("customers", customers);
 
-    //    @GetMapping("/customers")
-//    public String listCustomers(Model model){
-//        model.addAttribute("customers", customerService.getAllCustomer());
-//        return "customers";
-//    }
+//        try {
 //
-//    @GetMapping("/customers/new")
-//    public String createCustomerForm(Model model){
-//
-//        Customer customer = new Customer();
-//        model.addAttribute("customer",customer);
-//        return "create_customer";
-//    }
-//
-//    @PostMapping("/customers")
-//    public String saveCustomerForm(@ModelAttribute("customer") Customer customer){
-//        customerService.saveCustomer(customer);
-//        return "redirect:/customers";
-//    }
-//
-    @GetMapping("/customers/edit/{customer_id}")
-    public String editCustomerForm(@PathVariable Integer customer_id, Model model){
-        model.addAttribute("customer", customerService.getCustomerById(customer_id));
-        return"edit_customerb";
-    }
+//        } catch (SQLException e) {
+//            // Handle SQL exception
+//            e.printStackTrace();
+//            // You might want to return an error view here
+//            return "error";
+//        }
 
-    @PostMapping("/customers/{customer_id}")
-    public String updateCustomer(@PathVariable Integer customer_id,@ModelAttribute("customer")Customer customer, Model model){
-        Customer existingCustomer = customerService.getCustomerById(customer_id);
-        existingCustomer.setCustomer_id(customer_id);
-        existingCustomer.setFirstName(customer.getFirstName());
-        existingCustomer.setLastName(customer.getLastName());
-        existingCustomer.setEmail(customer.getEmail());
-        existingCustomer.setAddress(customer.getAddress());
-        existingCustomer.setPhone(customer.getPhone());
-        existingCustomer.setPassword(customer.getPassword());
-
-        customerService.updateCustomer((existingCustomer));
-        return "redirect:/customer/" + customer_id;
-    }
-
-//    @GetMapping("/customers/{customer_id}")
-//    public String deleteStudent(@PathVariable Integer customer_id){
-//        customerService.deleteCustomerById(customer_id);
-//        return "redirect:/customers";
-//    }
-
-    @GetMapping("/customer/{customer_id}")
-    public String viewCustomerById(@PathVariable Integer customer_id, Model model){
-        Customer customer = customerService.getCustomerById(customer_id);
-        model.addAttribute("customer", customer);
-        return "customer_detail"; // Ensure you have a template named "customer_detail.html"
+        // Return the view name (HTML file)
+        return "badmin";
     }
 }
-
