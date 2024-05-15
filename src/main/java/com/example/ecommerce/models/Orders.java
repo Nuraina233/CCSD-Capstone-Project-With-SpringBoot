@@ -10,6 +10,10 @@ public class Orders {
         this.orders = new ArrayList<>();
     }
 
+    public void addOrder(OrdersProduct order){
+        orders.add(order);
+    }
+
     public void removeOrder(OrdersProduct order){
         orders.remove(order);
     }
