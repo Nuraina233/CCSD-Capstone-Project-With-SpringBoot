@@ -1,5 +1,5 @@
 CCSD-Capstone-Project
-Build an e-commerce platform where users can browse products, add them to their cart, and place orders.
+Build an e-commerce platform where users can browse products, add them to their cart, and place ordersProduct.
 
 Features:
 

@@ -1,56 +1,28 @@
 package com.example.ecommerce.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Orders {
-    private int orderId;
-    private int prodID;
-    private int paymentID;
-    private Products products;
-//    private double size;
-    private int prodQuantity;
+    private List<OrdersProduct> orders;
 
-    public Orders(int orderId, int prodID, int prodQuantity, int paymentID/*, Products products, double size*/){
-        this.orderId = orderId;
-        this.prodID = prodID;
-        this.paymentID = paymentID;
-        //this.products = products;
-        //this.size = size;
-        this.prodQuantity = prodQuantity;
+    public Orders(){
+        this.orders = new ArrayList<>();
     }
 
-    public Products getProducts() {
-        return products;
+    public void removeOrder(OrdersProduct order){
+        orders.remove(order);
     }
 
-    public void setProducts(Products products) {
-        this.products = products;
+    public double calcTotal(){
+        double total = 0;
+        for (OrdersProduct order : orders){
+            total += order.getSubtotal();
+        }
+        return total;
     }
 
-//    public double getSize() {
-//        return size;
-//    }
-//
-//    public void setSize(double size) {
-//        this.size = size;
-//    }
-
-    public int getOrderId() {
-        return orderId;
+    public List<OrdersProduct> getOrders() {
+        return orders;
     }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public int getProdQuantity() {
-        return prodQuantity;
-    }
-
-    public void setProdQuantity(int prodQuantity) {
-        this.prodQuantity = prodQuantity;
-    }
-
-    public double getSubtotal(){
-        return products.getProdPrice() * prodQuantity;
-    }
-
 }
