@@ -20,7 +20,6 @@ public class CustomerController {
 
         // Add the list of customers to the model
         model.addAttribute("customers", customers);
-
 //        try {
 //
 //        } catch (SQLException e) {
