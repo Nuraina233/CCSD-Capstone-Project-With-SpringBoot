@@ -1,4 +1,4 @@
-package com.example.ecommerce.view;
+package com.example.ecommerce.repository;
 
 import java.sql.*;
 import java.util.ArrayList;
