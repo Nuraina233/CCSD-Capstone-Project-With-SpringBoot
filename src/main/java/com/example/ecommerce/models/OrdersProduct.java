@@ -7,12 +7,12 @@ public class OrdersProduct {
     private Products products;
     private int prodQuantity;
 
-    public OrdersProduct(int orderId, int prodID, int prodQuantity, int paymentID/*, Products products*/){
+    public OrdersProduct(int orderId, int prodID, int prodQuantity, int paymentID, Products products){
         this.orderId = orderId;
         this.prodID = prodID;
         this.paymentID = paymentID;
-        //this.products = products;
         this.prodQuantity = prodQuantity;
+        this.products = products;
     }
 
     public Products getProducts() {
@@ -43,4 +43,7 @@ public class OrdersProduct {
         return products.getProdPrice() * prodQuantity;
     }
 
+    public int getProdID() {
+        return prodID;
+    }
 }
