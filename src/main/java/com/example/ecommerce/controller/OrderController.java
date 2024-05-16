@@ -8,7 +8,7 @@ public class OrderController {
     @GetMapping("/cart")
     public String order(){
 
-        return "cartt";
+        return "cart";
     }
 //    @Autowired
 //    private DataSource dataSource;
