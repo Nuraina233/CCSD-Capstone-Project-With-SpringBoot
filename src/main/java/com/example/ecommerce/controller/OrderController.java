@@ -1,28 +1,14 @@
 package com.example.ecommerce.controller;
 
-import com.example.ecommerce.models.Orders;
-import com.example.ecommerce.models.OrdersProduct;
-import com.example.ecommerce.models.Products;
-import jakarta.annotation.PostConstruct;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 public class OrderController {
     @GetMapping("/cart")
     public String order(){
 
-        return "cart";
+        return "cartt";
     }
 //    @Autowired
 //    private DataSource dataSource;
@@ -43,7 +29,7 @@ public class OrderController {
 //        double total = orders.calcTotal();
 //        model.addAttribute("items", items);
 //        model.addAttribute("total", total);
-//        return "cart2"; // Return the name of the Thymeleaf template (cart.html)
+//        return "cart2"; // Return the name of the Thymeleaf template (cartt.html)
 //    }
 //
 //    private Products getProductById(int productId) {
