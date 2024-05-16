@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .receipt-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #6c757d;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .header h2 {
+            margin: 0;
+            color: #007bff;
+        }
+        .payment-info {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .payment-info th, .payment-info td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .payment-info th {
+            text-align: left;
+            color: #6c757d;
+        }
+        .payment-info td {
+            text-align: right;
+        }
+        .thank-you {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #6c757d;
+        }
+        .thank-you p {
+            margin: 0;
+            color: #28a745;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="receipt-container">
+    <div class="header">
+        <h2>Sport Shoes Ecommerce</h2>
+        <p>Payment Receipt</p>
+    </div>
+    <table class="payment-info">
+        <tr>
+            <th>Status of Payment:</th>
+            <td id="payment-status">Paid</td>
+        </tr>
+        <tr>
+            <th>Total Paid:</th>
+            <td id="total-paid">RM2188</td>
+        </tr>
+        <tr>
+            <th>Payment Method:</th>
+            <td id="payment-method">Credit Card</td>
+        </tr>
+        <tr>
+            <th>Date & Time:</th>
+            <td id="payment-date">May 16, 2024, 11.20 AM</td>
+        </tr>
+    </table>
+    <div class="thank-you">
+        <p>Thank you for your purchase!</p>
+    </div>
+</div>
+<script>
+    // Example JavaScript code to connect to your backend and update the receipt details
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('api/transaction-details') // Replace with your actual API endpoint
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('payment-status').textContent = data.status;
+          document.getElementById('total-paid').textContent = data.total;
+          document.getElementById('payment-method').textContent = data.method;
+          document.getElementById('payment-date').textContent = new Date(data.date).toLocaleString();
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>
