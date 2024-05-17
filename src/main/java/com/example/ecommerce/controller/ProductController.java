@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -88,19 +89,7 @@ public class ProductController {
         return "redirect:/productAdmin";
     }
 
-    @PostMapping("/productAdmin/stock")
-    public String stockProductPage(@RequestParam("prod_id") int id, Model model) throws SQLException {
 
-        //List the product by Id
-        Products products = ProductRepository.getEditProduct(id);
-        model.addAttribute("products", products);
-
-        //List of stock by product id
-        List<Stocks> stocks= ProductRepository.getStockProduct(id);
-        model.addAttribute("stocks", stocks);
-
-        return "stockProduct";
-    }
 
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam("passName") String passName,
@@ -122,17 +111,18 @@ public class ProductController {
         return "redirect:/productAdmin";
     }
 
-    @PostMapping("/productAdmin/stock/update")
-    public String updateStock(@RequestParam("passProdId") String passProdId,
-//                              @RequestParam("passStockId") String passStockId,
-//                              @RequestParam("passStockQty") String passStockQty,
-                              Model model){
+    @PostMapping("/productAdmin/stock")
+    public String stockProductPage(@RequestParam("prod_id") int id, Model model) throws SQLException {
 
-        System.out.println("ProdId:" +passProdId);
-//        System.out.println("passStockId:" +passStockId);
-//        System.out.println("passStockQty:" +passStockQty);
+        //List the product by Id
+        Products products = ProductRepository.getEditProduct(id);
+        model.addAttribute("products", products);
 
-        return "redirect:/productAdmin/stock";
+        //List of stock by product id
+        List<Stocks> stocks= ProductRepository.getStockProduct(id);
+        model.addAttribute("stocks", stocks);
+
+        return "stockProduct";
     }
 
     @PostMapping("/productAdmin/stock/remove")
@@ -143,15 +133,15 @@ public class ProductController {
         //get the list of product that want to edit
         ProductRepository.getRemoveStock(stockId);
 
-//        //List the product by Id
-//        Products products = ProductRepository.getEditProduct(prodId);
-//        model.addAttribute("products", products);
-//
-//        //List of stock by product id
-//        List<Stocks> stocks= ProductRepository.getStockProduct(stockId);
-//        model.addAttribute("stocks", stocks);
+        //List the product by Id
+        Products products = ProductRepository.getEditProduct(prodId);
+        model.addAttribute("products", products);
 
-        return "redirect:/productAdmin";
+        //List of stock by product id
+        List<Stocks> stocks= ProductRepository.getStockProduct(prodId);
+        model.addAttribute("stocks", stocks);
+
+        return "stockProduct";
     }
 
     @PostMapping("/productAdmin/stock/addButton")
@@ -178,14 +168,38 @@ public class ProductController {
         //get the list of product that want to edit
         ProductRepository.getInsertStock(prodId, passSize, passStock);
 
-//        //List the product by Id
-//        Products products = ProductRepository.getEditProduct(prodId);
-//        model.addAttribute("products", products);
-//
-//        //List of stock by product id
-//        List<Stocks> stocks= ProductRepository.getStockProduct(stockId);
-//        model.addAttribute("stocks", stocks);
+        //List the product by Id
+        Products products = ProductRepository.getEditProduct(prodId);
+        model.addAttribute("products", products);
 
-        return "redirect:/productAdmin";
+        //List of stock by product id
+        List<Stocks> stocks= ProductRepository.getStockProduct(prodId);
+        model.addAttribute("stocks", stocks);
+
+        return "stockProduct";
     }
+
+
+    @PostMapping("/productAdmin/stock/update")
+    public String updateStock(@RequestParam("stockId") int stockId,
+                              @RequestParam("prodId") int prodId,
+                              @RequestParam("passStockQty") int passStockQty,
+                              Model model) throws SQLException {
+
+        //get the list of product that want to edit
+        ProductRepository.getUpdateStock(passStockQty, stockId);
+
+        //List the product by Id
+        Products products = ProductRepository.getEditProduct(prodId);
+        model.addAttribute("products", products);
+
+        //List of stock by product id
+        List<Stocks> stocks= ProductRepository.getStockProduct(prodId);
+        model.addAttribute("stocks", stocks);
+
+        System.out.println("Quantity: " +passStockQty);
+
+        return "stockProduct";
+    }
+
 }

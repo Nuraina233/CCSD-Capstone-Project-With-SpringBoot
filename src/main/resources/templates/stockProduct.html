@@ -7768,58 +7768,57 @@ a.text-dark:hover {
             <!-- Left Column: Product Details -->
             <div class="col-md-6" th:each="product : ${products}">
                 <h2>Product Details</h2>
-                <form th:action="@{/productAdmin/stock/update}" method="post">
-                    <table>
-                        <tr>
-                            <td>
-                                <table class="table">
-                                    <tr>
-                                        <td>
-                                            <div class="image-container">
-                                                <img th:src="${product.getProdImage()}" style="width: 350px; height: auto;">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span style="font-weight: bold;">Product ID:</span>
-                                            <span th:text="${product.getProdId()}"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span style="font-weight: bold;">Name:</span>
-                                            <span th:text="${product.getProdName()}"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span style="font-weight: bold;">Price:</span>
-                                            <span th:text="${product.getProdPrice()}"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span style="font-weight: bold;">Color:</span>
-                                            <span th:text="${product.getProdColor()}"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span style="font-weight: bold;">Category:</span>
-                                            <span th:text="${product.getProdCategory()}"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span style="font-weight: bold;">Gender:</span>
-                                            <span th:text="${product.getProdGender()}"></span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
+                <table>
+                    <tr>
+                        <td>
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <div class="image-container">
+                                            <img th:src="${product.getProdImage()}" style="width: 350px; height: auto;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;">Product ID:</span>
+                                        <span th:text="${product.getProdId()}"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;">Name:</span>
+                                        <span th:text="${product.getProdName()}"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;">Price:</span>
+                                        <span th:text="${product.getProdPrice()}"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;">Color:</span>
+                                        <span th:text="${product.getProdColor()}"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;">Category:</span>
+                                        <span th:text="${product.getProdCategory()}"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;">Gender:</span>
+                                        <span th:text="${product.getProdGender()}"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <!-- Right Column: Stock Update -->
             <div class="col-md-6 pb-3">
@@ -7833,35 +7832,28 @@ a.text-dark:hover {
                         <th>Qty</th>
                         <td th:each="stock : ${stocks}" th:text="${stock.getStocks()}"></td>
                     </tr>
-
                     <tbody>
-                    <!-- Replace 'stocks' with the actual list of stock sizes -->
-                    <!-- You may retrieve this list dynamically from your backend -->
                     <tr th:each="stock,status : ${stocks}" class="mt-4">
-<!--                        <label>-->
-<!--                            <input th:value="${#strings.concat(status.index, ' - ', size)}">-->
-<!--                        </label>-->
+                        <form th:action="@{/productAdmin/stock/update}" method="post">
                         <table class="table">
                             <tr>
                                 <th th:text="${stock.getSizes()}" class="text-right"></th>
                                 <td style="text-align: left;">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary" type="button" onclick="changeSize(-1)">-</button>
-                                        </div>
-                                        <input type="number" name="qtyInput-${status.index}" id="sizeInput" class="form-control input-width" style="text-align: center;width:10px;" th:value="${stock.getStocks()}" min="1">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="button" onclick="changeSize(1)">+</button>
-                                        </div>
-                                    </div>
+                                    <input type="number" name="passStockQty" class="form-control input-width" style="text-align: center;width:100px;" th:value="${stock.getStocks()}" min="1">
                                 </td>
-                                </form>
-                                <td class="text-right">
-                                    <form th:action="@{/productAdmin/stock/remove}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to remove this item?');">
-                                        <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
-                                        <input type="hidden" name="prodId" th:value="${product.getProdId()}">
-                                        <button class="btn btn-danger">Remove</button>
-                                    </form>
+                                <td>
+                                    <div class="d-flex">
+                                        <form th:action="@{/productAdmin/stock/update}" th:method="post" th:each="product:${products}" style="margin-right: 10px;">
+                                            <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
+                                            <input type="hidden" name="prodId" th:value="${product.getProdId()}">
+                                            <button class="btn btn-success">+</button>
+                                        </form>
+                                        <form th:action="@{/productAdmin/stock/remove}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to remove this item?');">
+                                            <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
+                                            <input type="hidden" name="prodId" th:value="${product.getProdId()}">
+                                            <button class="btn btn-danger">Remove</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
@@ -7871,11 +7863,7 @@ a.text-dark:hover {
                 <div class="d-flex">
                     <form th:action="@{/productAdmin/stock/addButton}" th:method="post" class="mr-2" th:each="product:${products}">
                         <input type="hidden" name="passProdId" th:value="${product.getProdId()}">
-                        <button class="btn btn-primary">+</button>
-                    </form>
-                    <form th:action="@{/productAdmin/stock/update}" method="post" th:each="product:${products}">
-                        <input type="hidden" name="passProdId" th:value="${product.getProdId()}">
-                        <button class="btn btn-primary">Update Stock</button>
+                        <button class="btn btn-success">Add Size</button>
                     </form>
                 </div>
 
@@ -7883,39 +7871,6 @@ a.text-dark:hover {
         </div>
     </div>
 </section>
-
-<script>
-    function changeSize(amount) {
-        const sizeInput = document.getElementById('sizeInput');
-        let currentValue = parseInt(sizeInput.value, 10);
-        currentValue += amount;
-        if (currentValue < 1) currentValue = 1; // Ensure the value does not go below 1
-        sizeInput.value = currentValue;
-    }
-
-    // Function to handle updates and store stock IDs with quantities
-    function handleUpdate(stockId) {
-        const quantityInput = document.getElementById(`qtyInput-${stockId}`);
-        const quantity = quantityInput.value;
-        // Store the updated quantity along with the stock ID
-        // You can store this data in an object or array
-        console.log(`Stock ID: ${stockId}, Quantity: ${quantity}`);
-    }
-
-    // Add event listeners to input fields to capture changes
-    document.addEventListener('DOMContentLoaded', function() {
-        // Loop through each input field and add event listener
-        document.querySelectorAll('input[type="number"]').forEach(function(input) {
-            input.addEventListener('change', function(event) {
-                // Extract the stock ID from the input field's ID
-                const stockId = event.target.id.split('-')[1];
-                // Call the handleUpdate function with the stock ID
-                handleUpdate(stockId);
-            });
-        });
-    });
-</script>
-
 
 <script src="template/js/vendor/jquery-2.2.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"

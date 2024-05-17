@@ -417,7 +417,7 @@ public class ProductRepository {
 
             // Check if any rows were inserted
             if (rowsAffected > 0) {
-                System.out.println("Record inserted successfully!");
+                System.out.println("Stock inserted successfully!");
             } else {
                 System.out.println("No records inserted!");
             }
@@ -436,6 +436,48 @@ public class ProductRepository {
                 connection.close();
             }
 
+        }
+    }
+
+    //update stock by id
+    public static void getUpdateStock(int qty, int passId) throws SQLException {
+        try {
+            //connect to database
+            connection = DriverManager.getConnection(jdbcUrl, username, password);
+
+            //create a statement
+            String sql = "UPDATE " + tableStock + " SET " +
+                    stockColumn + " = ? " +
+                    " WHERE " + stockIdColumn + " = ?";
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Set the parameter value for all columns' placeholder
+            preparedStatement.setInt(1, qty);
+            preparedStatement.setInt(2, passId);
+
+            // Execute the UPDATE statement
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Check if any rows were updated
+            if (rowsAffected > 0) {
+                System.out.println("Stock updated successfully!");
+            } else {
+                System.out.println("No records updated!");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
         }
     }
 }
