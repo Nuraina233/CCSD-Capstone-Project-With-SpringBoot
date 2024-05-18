@@ -1,154 +1,116 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<div class="container">
-    <div class="row">
-        <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6" style="text-align: left;">
-                    <address>
-                        <strong>Sport Shoes </strong>
-                        <br>
-                        Laman Norsham, Pertama 6
-                        <br>
-                        Kampung Melayu Kundang
-                        <br>
-                        <abbr title="Phone">P:</abbr> (+60) 13-6270614
-                    </address>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
-                    <p>
-                        <em>Date: 16 May, 2024</em>
-                    </p>
-                    <p>
-                        <em>Receipt #: 34522677W</em>
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="text-center">
-                    <h1>Receipt</h1>
-                </div>
-                </span>
-                <table class="table table-hover" style="margin: 0 auto;">
-                    <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>#</th>
-                        <th class="text-center">Price</th>
-                        <th class="text-center">Total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="col-md-9"><em>ADIZERO TAKUMI SEN 10  SHOES</em></h4></td>
-                        <td class="col-md-1" style="text-align: center"> 2 </td>
-                        <td class="col-md-1 text-center">749.00</td>
-                        <td class="col-md-1 text-center">1498.00</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-9"><em>NIKE RIVAL FLY 3</em></h4></td>
-                        <td class="col-md-1" style="text-align: center"> 1 </td>
-                        <td class="col-md-1 text-center">219.00</td>
-                        <td class="col-md-1 text-center">219.00</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-9"><em>ADIDAS TERREX JAWPAW SLIP-ON HEAT.DRY WATER SHOES</em></h4></td>
-                        <td class="col-md-1" style="text-align: center"> 3 </td>
-                        <td class="col-md-1 text-center">155.00</td>
-                        <td class="col-md-1 text-center">465.00</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td class="text-right">
-                            <p>
-                                <strong>Subtotal:</strong>
-                            </p>
-                            <p>
-                                <strong>Tax:</strong>
-                            </p></td>
-                        <td class="text-center">
-                            <p>
-                                <strong>2182.00</strong>
-                            </p>
-                            <p>
-                                <strong>6.00</strong>
-                            </p></td>
-                    </tr>
-                    <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td class="text-right"><h4><strong>Total:</strong></h4></td>
-                        <td class="text-center text-danger"><h4><strong>2188.00</strong></h4></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <button type="submit" id="payNowBtn" class="btn btn-success btn-lg btn-block">Pay Now<span class="glyphicon glyphicon-chevron-right"></span></button></td>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #343a40;
+        }
+        label {
+            color: #495057;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .bank-options {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Payment Form</h2>
+    <form id="payment-form">
+        <div class="form-group">
+            <label for="payment-method">Payment Method</label>
+            <select id="payment-method" name="payment-method">
+                <option value="credit-card">Credit Card</option>
+                <option value="cash-on-delivery">Cash On Delivery</option>
+                <option value="bank-transfer">Online Banking</option>
+                <!-- Add more payment methods as needed -->
+            </select>
         </div>
-    </div>
+        <div class="form-group bank-options" id="bank-options">
+            <label for="bank-selection">Select Bank</label>
+            <select id="bank-selection" name="bank-selection">
+                <option value="Bank Islam">Bank Islam</option>
+                <option value="CIMB Bank">CIMB Bank</option>
+                <option value="Maybank">Maybank</option>
+                <option value="RHB">RHB</option>
+                <!-- Add more banks as needed -->
+            </select>
+        </div>
+        <div class="form-group" id="card-details" style="display: none;">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card-number" placeholder="Enter card number">
+            <label for="expiry-date">Expiry Date</label>
+            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" name="cvv" placeholder="Enter CVV">
+        </div>
+        <button type="submit" class="btn btn-success">Submit Payment</button>
+    </form>
 </div>
-<script>
-    document.getElementById('payNowBtn').addEventListener('click', function() {
-      // Here you would typically send the payment details to the server
-      // using AJAX and handle the response
 
-      // For demonstration, we'll just redirect to a new page
-      window.location.href = 'receipt.html';
-    });
-</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    document.getElementById('payNowBtn').addEventListener('click', function() {
-        // Define the payment details
-        var paymentDetails = {
-            address: document.getElementById('address').textContent,
-            orderSummary: document.getElementById('orderSummary').textContent,
-            paymentMethod: document.getElementById('paymentMethod').textContent,
-            totalPrice: document.getElementById('totalPrice').textContent
-        };
+    document.getElementById('payment-method').addEventListener('change', function() {
+        var selectedPaymentMethod = this.value;
+        var cardDetails = document.getElementById('card-details');
+        var bankOptions = document.getElementById('bank-options');
 
-        // Send the payment details to the server
-        fetch('api/payment-process', { // Replace with your actual API endpoint
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(paymentDetails)
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Check if the payment was successful
-            if(data.success) {
-                // Redirect to the receipt page with the transaction ID
-                window.location.href = 'receipt_page.html?transactionId=' + data.transactionId;
-            } else {
-                // Handle payment failure (e.g., display an error message)
-                console.error('Payment failed:', data.message);
-            }
-        })
-        .catch(error => console.error('Error:', error));
+        if (selectedPaymentMethod === 'credit-card') {
+            cardDetails.style.display = 'block';
+            bankOptions.style.display = 'none';
+        } else if (selectedPaymentMethod === 'bank-transfer') {
+            cardDetails.style.display = 'none';
+            bankOptions.style.display = 'block';
+        } else {
+            cardDetails.style.display = 'none';
+            bankOptions.style.display = 'none';
+        }
+    });
+
+    document.getElementById('payment-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        var receiptUrl = 'receipt.html';
+        window.location.href = receiptUrl; // Redirect to receipt page
     });
 </script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Extract the transaction ID from the URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var transactionId = urlParams.get('transactionId');
-
-        // Fetch the transaction details using the transaction ID
-        fetch('api/transaction-details/' + transactionId) // Replace with your actual API endpoint
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('payment-status').textContent = data.status;
-                document.getElementById('total-paid').textContent = data.total;
-                document.getElementById('payment-method').textContent = data.method;
-                document.getElementById('payment-date').textContent = new Date(data.date).toLocaleString();
-            })
-            .catch(error => console.error('Error:', error));
-    });
-</script>
-
+</body>
+</html>

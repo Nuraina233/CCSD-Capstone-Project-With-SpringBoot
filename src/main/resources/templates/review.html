@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Shoes Reviews</title>
+    <link rel="stylesheet" href="path_to_your_stylesheet.css">
+</head>
+<style>
+    /* Add this CSS in your stylesheet or within a <style> tag in the head of your HTML document */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.review-section {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.review-section h2,
+.review-section h3 {
+    color: #333;
+}
+
+.review-form,
+.reviews-list {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding in total width and height */
+}
+
+button[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+.reviews-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.reviews-list li {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.reviews-list strong {
+    display: block;
+    color: #333;
+}
+
+.reviews-list span {
+    color: #e6ac00; /* Gold color for stars */
+}
+
+.reviews-list p {
+    margin: 5px 0 0;
+}
+
+</style>
+<body>
+<div class="review-section">
+    <h2>Customer Reviews</h2>
+
+    <!-- Review Form -->
+    <div class="review-form">
+        <h3>Write a Review</h3>
+        <form action="path_to_your_form_handler" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating">
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Star</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="review">Review:</label>
+                <textarea id="review" name="review" rows="5" required></textarea>
+            </div>
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+
+    <!-- Reviews List -->
+    <div class="reviews-list">
+        <h3>Recent Reviews</h3>
+        <ul>
+            <!-- Reviews will be dynamically loaded here -->
+            <li>
+                <strong>John Doe</strong>
+                <span>★★★★☆</span>
+                <p>Great shoes! Very comfortable and stylish.</p>
+            </li>
+            <!-- Repeat for each review -->
+        </ul>
+    </div>
+</div>
+
+<script src="path_to_your_javascript.js"></script>
+</body>
+</html>
