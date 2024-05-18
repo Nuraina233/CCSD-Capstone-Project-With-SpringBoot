@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class ProductController {
     @GetMapping("/productAdmin")
     public String getCustomers(Model model) throws SQLException {
         List<Products> products = ProductRepository.getProductList();
+
 
         // Add the list of products to the model
         model.addAttribute("products", products);
@@ -30,9 +32,22 @@ public class ProductController {
     @PostMapping("/productAdmin/editProduct")
     public String editProductPage(@RequestParam("prod_id") int id, Model model) throws SQLException {
 
+        List<String> categories = new ArrayList<>();
+        categories.clear();
+        categories.add("Running Shoes");
+        categories.add("Sneakers");
+        categories.add("Outdoor");
+
+        List<String> genders = new ArrayList<>();
+        genders.clear();
+        genders.add("Men");
+        genders.add("Women");
+
         //get the list of product that want to edit
         Products products = ProductRepository.getEditProduct(id);
         model.addAttribute("products", products);
+        model.addAttribute("genders", genders);
+        model.addAttribute("categories", categories);
 
         // Return the result page
         return "editProduct";
