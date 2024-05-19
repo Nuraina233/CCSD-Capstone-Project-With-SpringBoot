@@ -9,177 +9,114 @@
     <!-- Custom CSS for Adidas-style UI -->
     <style>
         body {
-     background-color: hsl(225, 100%, 94%);
-     min-height: 100vh;
-     margin: 0;
-     text-align: center;
-     font-family: 'Red Hat Display', Calibri, sans-serif;
- }
-
- .bg-img {
-     background-image: url(../images/pattern-background-desktop.svg);
-     background-size: cover;
- }
-
- /* Main container */
- #container-white {
-     background-color: white;
-     border-radius: 20px;
-     margin: auto;
-     margin-top: 5%;
-     margin-bottom: 5%;
-     padding: 0;
-     box-shadow: 0px 1px 6px hsl(224, 23%, 55%);
- }
-
- .hero-img {
-     width: 100%;
-     background-size: cover;
-     border-top-right-radius: 20px;
-     border-top-left-radius: 20px;
- }
-
- h1 {
-     font-weight: 900;
-     font-size: 1.8rem;
-     color: hsl(223, 47%, 23%);
-     padding-top: 8%;
- }
-
- .text-1 {
-     color: hsl(224, 23%, 55%);
-     font-size: 1rem;
-     padding: 3% 10%;
- }
-
- /* Annual plan container */
- #annual {
-     background-color: hsl(225, 100%, 98%);
-     border-radius: 10px;
-     margin: 0 10%;
-     width: 80%;
- }
-
- .music-icon {
-     margin: 20%;
-
- }
-
- .annual-plan {
-     padding: 0;
- }
-
- h2 {
-     font-weight: 700;
-     font-size: 1rem;
-     text-align: left;
-     margin-top: 10%;
-     color: hsl(223, 47%, 23%);
-
- }
-
- .price {
-     font-size: 0.9rem;
-     text-align: left;
-     color: hsl(224, 23%, 55%);
-
- }
-
- .change {
-     text-decoration: underline;
-     text-align: right;
-     font-size: 0.7rem;
-     margin: 30% 10%;
-     font-weight: 700;
-     color: #4B22D7;
-
-
- }
- .change:hover {
-     color: #7D6AE9;
-     text-decoration: none;
- }
-
- /* Button */
-.btn {
-    -webkit-border-radius: 9;
-    -moz-border-radius: 9;
-    border-radius: 9px;
-    -webkit-box-shadow: 0px 2px 6px #828282;
-    -moz-box-shadow: 0px 2px 6px #828282;
-    box-shadow: 0px 2px 6px #828282;
-    font-family: 'Red Hat Display', Calibri, sans-serif;
-    font-weight: 700;
-    color: #ffffff;
-    font-size: 0.8rem;
-    background: #4B22D7;
-    padding: 14px 25%;
-    text-decoration: none;
-    margin: 10% auto; /* Center the button horizontally */
-    display: block; /* Ensure the button takes full width */
-}
-.btn:hover {
-    background: #7D6AE9;
-    text-decoration: none
-
- .cancel {
-     color: hsl(224, 23%, 55%);
-     font-size: 0.8rem;
-     font-weight: 700;
-     margin-bottom: 10%;
- }
- .cancel:hover {
-     color: hsl(223, 47%, 23%);
- }
-
- /* Attribution */
- .attribution {
-     font-size: 0.6rem;
-     margin-top: 10px;
-     margin-bottom: 300px;
-     position: relative;
-     top: 15px;
-   }
-   .attribution a {
-     color: hsl(228, 45%, 44%);
-   }
+            background-color: hsl(225, 100%, 94%);
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            font-family: 'Red Hat Display', Calibri, sans-serif;
+        }
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            margin: auto;
+            margin-top: 5%;
+            margin-bottom: 5%;
+            padding: 30px;
+            box-shadow: 0px 1px 6px hsl(224, 23%, 55%);
+            max-width: 600px;
+        }
+        h2 {
+            color: hsl(223, 47%, 23%);
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+        .table {
+            margin-top: 20px;
+        }
+        .btn {
+            -webkit-border-radius: 9;
+            -moz-border-radius: 9;
+            border-radius: 9px;
+            -webkit-box-shadow: 0px 2px 6px #828282;
+            -moz-box-shadow: 0px 2px 6px #828282;
+            box-shadow: 0px 2px 6px #828282;
+            font-family: 'Red Hat Display', Calibri, sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 0.8rem;
+            background: #4B22D7;
+            padding: 14px 25%;
+            text-decoration: none;
+            margin: 10% auto; /* Center the button horizontally */
+            display: block; /* Ensure the button takes full width */
+        }
+        .btn:hover {
+            background: #7D6AE9;
+            text-decoration: none;
+        }
+        .attribution {
+            font-size: 0.6rem;
+            margin-top: 10px;
+            margin-bottom: 300px;
+            position: relative;
+            top: 15px;
+        }
+        .attribution a {
+            color: hsl(228, 45%, 44%);
+        }
+        .total-price {
+            font-weight: bold;
+            color: hsl(223, 47%, 23%);
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2 class="text-center mb-4">Order Summary</h2>
     <div id="order-details" class="mb-3">
-        <!-- Order details will be fetched and displayed here -->
-        <p class="text-muted text-center">Your order details will appear here.</p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Adidas Running Shoes</td>
+                <td>1</td>
+                <td>RM 120.00</td>
+            </tr>
+            <tr>
+                <td>Adidas Sports T-shirt</td>
+                <td>2</td>
+                <td>RM 50.00</td>
+            </tr>
+            <tr>
+                <td>Adidas Gym Shorts</td>
+                <td>1</td>
+                <td>RM 35.00</td>
+            </tr>
+            <tr>
+                <td>Adidas Cap</td>
+                <td>3</td>
+                <td>RM 60.00</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2" class="text-right total-price">Total Price</td>
+                <td class="total-price">RM 375.00</td>
+            </tr>
+            </tfoot>
+        </table>
     </div>
     <div class="text-center"> <!-- Center the button -->
         <button onclick="location.href='payments.html'" class="btn btn-primary btn-lg">Proceed to Payment</button>
     </div>
 </div>
-</div>
 <!-- Include your JavaScript file here -->
 <script src="ecommerce-functionality.js"></script>
-<script>
-    // Fetch data from Java program and display it on the page
-    fetch('http://localhost:8080/OrderSummary')
-        .then(response => response.json())
-        .then(data => {
-            let tableHtml = '<table class="table">';
-            tableHtml += '<thead><tr><th>Product Name</th><th>Quantity</th><th>Price</th></tr></thead>';
-            tableHtml += '<tbody>';
-            data.forEach(item => {
-                tableHtml += '<tr>';
-                tableHtml += '<td>' + item.productName + '</td>';
-                tableHtml += '<td>' + item.quantity + '</td>';
-                tableHtml += '<td>' + item.price + '</td>';
-                tableHtml += '</tr>';
-            });
-            tableHtml += '</tbody>';
-            tableHtml += '</table>';
-            document.getElementById('order-table').innerHTML = tableHtml;
-        })
-        .catch(error => console.error('Error:', error));
-</script>
-
 </body>
 </html>

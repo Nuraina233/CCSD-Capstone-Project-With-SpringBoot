@@ -3,140 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sport Shoes Reviews</title>
-    <link rel="stylesheet" href="path_to_your_stylesheet.css">
+    <title>Product Reviews</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .review-form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-form label {
+            font-weight: bold;
+        }
+
+        .review-form textarea {
+            height: 100px;
+        }
+
+        .review-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .review-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .review-table {
+            margin-top: 50px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-table th, .review-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .review-table tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
-<style>
-    /* Add this CSS in your stylesheet or within a <style> tag in the head of your HTML document */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-
-.review-section {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
-}
-
-.review-section h2,
-.review-section h3 {
-    color: #333;
-}
-
-.review-form,
-.reviews-list {
-    margin-top: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-group input[type="text"],
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* Include padding in total width and height */
-}
-
-button[type="submit"] {
-    background-color: #5cb85c;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button[type="submit"]:hover {
-    background-color: #4cae4c;
-}
-
-.reviews-list ul {
-    list-style: none;
-    padding: 0;
-}
-
-.reviews-list li {
-    border-bottom: 1px solid #eee;
-    padding: 15px 0;
-}
-
-.reviews-list strong {
-    display: block;
-    color: #333;
-}
-
-.reviews-list span {
-    color: #e6ac00; /* Gold color for stars */
-}
-
-.reviews-list p {
-    margin: 5px 0 0;
-}
-
-</style>
 <body>
-<div class="review-section">
-    <h2>Customer Reviews</h2>
-
-    <!-- Review Form -->
-    <div class="review-form">
-        <h3>Write a Review</h3>
-        <form action="path_to_your_form_handler" method="post">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+<div class="container">
+    <h1 class="title">Product Reviews</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <!-- Review Form -->
+            <div class="review-form">
+                <h2>Add a Review</h2>
+                <form method="POST" action="/reviews">
+                    <div class="form-group">
+                        <label for="productId">Product ID:</label>
+                        <input type="number" class="form-control" id="productId" name="productId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" id="comment" name="comment" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerId">Customer ID:</label>
+                        <input type="number" class="form-control" id="customerId" name="customerId" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="rating">Rating:</label>
-                <select id="rating" name="rating">
-                    <option value="5">5 Stars</option>
-                    <option value="4">4 Stars</option>
-                    <option value="3">3 Stars</option>
-                    <option value="2">2 Stars</option>
-                    <option value="1">1 Star</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="review">Review:</label>
-                <textarea id="review" name="review" rows="5" required></textarea>
-            </div>
-            <button type="submit">Submit Review</button>
-        </form>
+        </div>
     </div>
 
-    <!-- Reviews List -->
-    <div class="reviews-list">
-        <h3>Recent Reviews</h3>
-        <ul>
-            <!-- Reviews will be dynamically loaded here -->
-            <li>
-                <strong>John Doe</strong>
-                <span>★★★★☆</span>
-                <p>Great shoes! Very comfortable and stylish.</p>
-            </li>
-            <!-- Repeat for each review -->
-        </ul>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <!-- Review Table -->
+            <div class="review-table">
+                <h2 class="title">All Reviews</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Review ID</th>
+                        <th>Product ID</th>
+                        <th>Comment</th>
+                        <th>Rating</th>
+                        <th>Review Date</th>
+                        <th>Customer ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="review : ${reviews}">
+                        <td th:text="${review.reviewId}"></td>
+                        <td th:text="${review.productId}"></td>
+                        <td th:text="${review.comment}"></td>
+                        <td th:text="${review.rating}"></td>
+                        <td th:text="${review.reviewDate}"></td>
+                        <td th:text="${review.customerId}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-
-<script src="path_to_your_javascript.js"></script>
 </body>
 </html>
