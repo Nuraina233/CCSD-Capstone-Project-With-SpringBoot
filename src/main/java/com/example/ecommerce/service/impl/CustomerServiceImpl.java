@@ -3,6 +3,7 @@ package com.example.ecommerce.service.impl;
 import com.example.ecommerce.entity.Customer;
 import com.example.ecommerce.repository.CustomerRepository;
 import com.example.ecommerce.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     private CustomerRepository customerRepository;
 
+    @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository){
         super();
         this.customerRepository = customerRepository;
@@ -42,5 +44,15 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.deleteById(customer_id);
     }
 
+    @Override
+    public Customer getCustomerByEmail(String currentEmail) {
+
+        return customerRepository.findByEmail(currentEmail);
+    }
+
+
 
 }
+
+
+
