@@ -14,8 +14,18 @@ public class ProductPageServiceImpl implements ProductPageService {
     @Autowired
     private ProductPageRepository productPageRepository;
 
+    public ProductPageServiceImpl(ProductPageRepository productPageRepository){
+        super();
+        this.productPageRepository = productPageRepository;
+    }
+
     @Override
     public List<ProductPage> getAllProductPage(){
         return productPageRepository.findAll();
+    }
+
+    @Override
+    public ProductPage getProductPageById(Integer product_id){
+        return productPageRepository.findById(product_id).get();
     }
 }
