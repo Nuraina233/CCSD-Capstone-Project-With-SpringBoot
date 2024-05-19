@@ -1,3 +1,103 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Shopping Cart</title>-->
+<!--    &lt;!&ndash; Include Bootstrap CSS for styling &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+<!--    <style>-->
+<!--        .quantity-cell {-->
+<!--            text-align: center;-->
+<!--            vertical-align: middle;-->
+<!--        }-->
+<!--        .center-text {-->
+<!--            text-align: center;-->
+<!--        }-->
+<!--        .btn-primary {-->
+<!--            background-color: #8d8257; /* Fallback color */-->
+<!--            border-color: #8d8257;-->
+<!--            border-radius: 20px;-->
+<!--            color: #000000;-->
+<!--            font-weight: bold;-->
+<!--            padding: 5px 10px;-->
+<!--            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .btn-primary:hover {-->
+<!--            background-color: #dbcc8f;-->
+<!--            border-color: #8d8257;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container mt-5">-->
+<!--    <h1 class="center-text">Shopping Cart</h1>-->
+<!--    <table class="table table-bordered">-->
+<!--        <thead class="thead-light">-->
+<!--        <tr>-->
+<!--            <th class="center-text">Order ID</th>-->
+<!--            <th class="center-text">Product ID</th>-->
+<!--            <th class="center-text">Product Name</th>-->
+<!--            <th class="center-text">Quantity</th>-->
+<!--            <th class="center-text">Subtotal (RM)</th>-->
+<!--            <th class="center-text">Actions</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="orderProduct : ${orderproducts}">-->
+<!--            <td class="center-text" th:text="${orderProduct.getOrderId()}"></td>-->
+<!--            <td class="center-text" th:text="${orderProduct.getProducts().getProdId()}"></td>-->
+<!--            <td class="center-text" th:text="${orderProduct.getProducts().getProdName()}"></td>-->
+<!--            &lt;!&ndash; Quantity Dropdown &ndash;&gt;-->
+<!--            <td class="quantity-cell">-->
+<!--                <form th:action="@{/cart/updateQuantity}" method="post" id="updateForm-${orderProduct.orderId}-${orderProduct.products.prodId}">-->
+<!--                    <select name="quantity" id="quantity-${orderProduct.orderId}-${orderProduct.products.prodId}" class="form-control">-->
+<!--                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}" th:selected="${i} == ${orderProduct.prodQuantity}"></option>-->
+<!--                    </select>-->
+<!--                    <input type="hidden" name="orderId" th:value="${orderProduct.getOrderId()}"/>-->
+<!--                    <input type="hidden" name="prodId" th:value="${orderProduct.getProducts().getProdId()}"/>-->
+<!--                    <button type="submit" class="btn btn-primary mt-2">Update</button>-->
+<!--                </form>-->
+<!--            </td>-->
+<!--            <td class="center-text" th:text="${orderProduct.getSubtotal()}"></td>-->
+<!--            <td class="center-text">-->
+<!--                <form th:action="@{/cart/removeProduct}" method="post" id="removeForm-${orderProduct.orderId}-${orderProduct.products.prodId}">-->
+<!--                    <input type="hidden" name="orderproductId" th:value="${orderProduct.getOrderproductId()}"/>-->
+<!--                    <button class="btn btn-danger" type="submit">Remove</button>-->
+<!--                </form>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+<!--    &lt;!&ndash; Total Subtotal table &ndash;&gt;-->
+<!--    <table class="table table-bordered">-->
+<!--        <tbody>-->
+<!--        <tr>-->
+<!--            <td class="center-text" colspan="4">Total Subtotal (RM) :</td>-->
+<!--            <td id="totalSubtotal" class="center-text" th:text="${totalSubtotal}">0.00</td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+<!--    &lt;!&ndash; Checkout & Continue Shopping Button &ndash;&gt;-->
+<!--    <div class="text-center mt-3">-->
+<!--        <a href="" class="btn btn-primary mr-2">Checkout</a>-->
+<!--        <a href="/adminDashboard" class="btn btn-primary">Continue Shopping</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Include jQuery and Bootstrap JS for enhanced functionality &ndash;&gt;-->
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,38 +107,74 @@
     <!-- Include Bootstrap CSS for styling -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
-        .quantity-cell {
-            text-align: center;
-            vertical-align: middle;
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            margin-bottom: 20px;
+        }
+        .table thead th {
+            background-color: #f1c40f;
+            color: #fff;
+            border: none;
+        }
+        .table tbody tr {
+            transition: background-color 0.3s;
+        }
+        .table tbody tr:hover {
+            background-color: #f7f7f7;
+        }
+        .btn-primary {
+            background-color: #3498db;
+            border-color: #3498db;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: bold;
+            padding: 8px 15px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .btn-danger {
+            border-radius: 20px;
+            padding: 5px 10px;
+        }
+        .btn-checkout {
+            background-color: #e67e22;
+            border-color: #e67e22;
+        }
+        .btn-checkout:hover {
+            background-color: #d35400;
+        }
+        .btn-continue {
+            background-color: #2ecc71;
+            border-color: #2ecc71;
+        }
+        .btn-continue:hover {
+            background-color: #27ae60;
+        }
+        .quantity-cell select {
+            width: 60px;
+            margin: 0 auto;
+            display: block;
         }
         .center-text {
             text-align: center;
-        }
-        .btn-primary {
-            background-color: #8d8257;
-            border-color: #8d8257;
-            border-radius: 20px;
-            color: #FFFFFF;
-            font-weight: bold;
-            padding: 5px 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .btn-primary:hover {
-            background-color: #dbcc8f;
-            border-color: #8d8257;
-        }
-        .btn-secondary {
-            background-color: blue;
-            border-color: #9fcdff;
-            border-radius: 20px;
-            color: #FFFFFF;
-            font-weight: bold;
-            padding: 5px 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .btn-secondary:hover {
-            background-color: #7D6AE9;
-            border-color: #9fcdff;
         }
     </style>
 </head>
@@ -63,26 +199,23 @@
             <td class="center-text" th:text="${orderProduct.getProducts().getProdName()}"></td>
             <!-- Quantity Dropdown -->
             <td class="quantity-cell">
-                <select id="quantity-${orderProduct.orderId}-${orderProduct.products.prodId}" class="form-control" onchange="updateSubtotal(${orderProduct.orderId}, ${orderProduct.products.prodId})">
-                    <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}" th:selected="${i} == ${orderProduct.prodQuantity}"></option>
-                </select>
-                <!-- Hidden form for updating quantity -->
-                <form th:action="@{/cart/updateQuantity}" method="post" id="updateForm-${orderProduct.orderId}-${orderProduct.products.prodId}" style="display: none;">
+                <form th:action="@{/cart/updateQuantity}" method="post" id="updateForm-${orderProduct.orderId}-${orderProduct.products.prodId}">
+                    <select name="quantity" id="quantity-${orderProduct.orderId}-${orderProduct.products.prodId}" class="form-control">
+                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="${i}" th:text="${i}" th:selected="${i} == ${orderProduct.prodQuantity}"></option>
+                    </select>
                     <input type="hidden" name="orderId" th:value="${orderProduct.getOrderId()}"/>
                     <input type="hidden" name="prodId" th:value="${orderProduct.getProducts().getProdId()}"/>
-                    <input type="hidden" name="quantity" id="formQuantity-${orderProduct.orderId}-${orderProduct.products.prodId}"/>
+                    <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>
             </td>
-            <td class="center-text" id="subtotal-${orderProduct.orderId}-${orderProduct.products.prodId}" th:text="${orderProduct.getSubtotal()}"></td>
+            <td class="center-text" th:text="${orderProduct.getSubtotal()}"></td>
             <td class="center-text">
                 <form th:action="@{/cart/removeProduct}" method="post" id="removeForm-${orderProduct.orderId}-${orderProduct.products.prodId}">
                     <input type="hidden" name="orderproductId" th:value="${orderProduct.getOrderproductId()}"/>
-                    <button class="btn btn-primary mt-2" type="submit">Remove</button>
+                    <button class="btn btn-danger" type="submit">Remove</button>
                 </form>
-                <button class="btn btn-secondary mt-2" id="updateBtn-${orderProduct.orderId}-${orderProduct.prodId}" onclick="updateSubtotal(${orderProduct.orderId}, ${orderProduct.products.prodId})" >Update</button>
             </td>
         </tr>
-
         </tbody>
     </table>
 
@@ -98,8 +231,8 @@
 
     <!-- Checkout & Continue Shopping Button -->
     <div class="text-center mt-3">
-        <a href="/" class="btn btn-primary mr-2">Checkout</a>
-        <a href="/home" class="btn btn-primary">Continue Shopping</a>
+        <a href="/orderSummary" class="btn btn-primary btn-checkout mr-2">Checkout</a>
+        <a href="/home" class="btn btn-primary btn-continue">Continue Shopping</a>
     </div>
 </div>
 
@@ -107,25 +240,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-<script>
-    function updateSubtotal(orderId, prodId) {
-        const quantity = document.getElementById(`quantity-${orderId}-${prodId}`).value;
-        const pricePerUnit = parseFloat(document.getElementById(`price-${orderId}-${prodId}`).innerText);
-        const newSubtotal = pricePerUnit * quantity;
-        document.getElementById(`subtotal-${orderId}-${prodId}`).innerText = newSubtotal.toFixed(2);
-        document.getElementById(`formQuantity-${orderId}-${prodId}`).value = quantity;
-        calculateTotalSubtotal();
-    }
-
-    function calculateTotalSubtotal() {
-        let totalSubtotal = 0;
-        document.querySelectorAll('[id^="subtotal-"]').forEach(subtotalCell => {
-            totalSubtotal += parseFloat(subtotalCell.innerText);
-        });
-        document.getElementById('totalSubtotal').innerText = totalSubtotal.toFixed(2);
-    }
-</script>
 
 </body>
 </html>
