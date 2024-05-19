@@ -30,10 +30,13 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(Customizer.withDefaults())
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
+                        authorize.requestMatchers("/**").permitAll()
                                 .requestMatchers("/index").permitAll()
                                 .requestMatchers("/cart").permitAll()
-                                .requestMatchers("/customer/**").permitAll()
+                                .requestMatchers("/customer/1").permitAll()
+                                .requestMatchers("/customers/edit/1").permitAll()
+                                .requestMatchers("/customers/{customer_id}").permitAll()
+                                .requestMatchers("/product_page").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
                 ).formLogin(
                         form -> form
