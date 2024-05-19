@@ -29,6 +29,7 @@ public class SpringSecurity {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+<<<<<<< Updated upstream
         http.csrf(Customizer.withDefaults()) // Configures CSRF protection with default settings
                 .authorizeHttpRequests((authorize) -> // Configures request authorization
                         authorize.requestMatchers("/register/**").permitAll() // Permits all requests starting with "/register/"
@@ -53,6 +54,24 @@ public class SpringSecurity {
                 .logout(logout -> logout // Configures logout behavior
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // Specifies the URL to trigger logout
                         .permitAll() // Permits access to the logout URL
+=======
+        http.csrf(Customizer.withDefaults())
+                .authorizeHttpRequests((authorize) ->
+                        authorize.requestMatchers("/register/**").permitAll()
+                                .requestMatchers("/index").permitAll()
+                                .requestMatchers("/cart").permitAll()
+                                .requestMatchers("/users").hasRole("ADMIN")
+                ).formLogin(
+                        form -> form
+                                .loginPage("/login")
+                                .loginProcessingUrl("/login")
+                                .defaultSuccessUrl("/users")
+                                .permitAll()
+                ).logout(
+                        logout -> logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .permitAll()
+>>>>>>> Stashed changes
                 );
         return http.build(); // Builds and returns the configured HttpSecurity object
     }

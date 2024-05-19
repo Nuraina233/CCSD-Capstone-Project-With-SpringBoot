@@ -26,6 +26,7 @@ public class Orders {
         // You might fetch product details from a database or some other data source
         // and then create an OrdersProduct object to add to the orderProducts list
     }
+//    public void addProduct(OrdersProduct ordersProduct){}
 
     public void updateProductQuantity(int prodId, int quantity) {
         // Implement logic to update the quantity of a product in the order
@@ -35,6 +36,7 @@ public class Orders {
     public void removeProduct(int prodId) {
         // Implement logic to remove a product from the order
         // Find the OrdersProduct with the given prodId and remove it from the orderProducts list
+        ordersProduct.removeIf(product -> product.getProdID() == prodId);
     }
 
     public double calcTotal(){
