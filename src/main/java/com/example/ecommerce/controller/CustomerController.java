@@ -19,26 +19,6 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    //    @GetMapping("/customers")
-//    public String listCustomers(Model model){
-//        model.addAttribute("customers", customerService.getAllCustomer());
-//        return "customers";
-//    }
-//
-//    @GetMapping("/customers/new")
-//    public String createCustomerForm(Model model){
-//
-//        Customer customer = new Customer();
-//        model.addAttribute("customer",customer);
-//        return "create_customer";
-//    }
-//
-//    @PostMapping("/customers")
-//    public String saveCustomerForm(@ModelAttribute("customer") Customer customer){
-//        customerService.saveCustomer(customer);
-//        return "redirect:/customers";
-//    }
-//
     @GetMapping("/customers/edit/{customer_id}")
     public String editCustomerForm(@PathVariable Integer customer_id, Model model){
         model.addAttribute("customer", customerService.getCustomerById(customer_id));
@@ -54,17 +34,11 @@ public class CustomerController {
         existingCustomer.setEmail(customer.getEmail());
         existingCustomer.setAddress(customer.getAddress());
         existingCustomer.setPhone(customer.getPhone());
-        existingCustomer.setPassword(customer.getPassword());
+//        existingCustomer.setPassword(customer.getPassword());
 
         customerService.updateCustomer((existingCustomer));
         return "redirect:/customer/" + customer_id;
     }
-
-//    @GetMapping("/customers/{customer_id}")
-//    public String deleteStudent(@PathVariable Integer customer_id){
-//        customerService.deleteCustomerById(customer_id);
-//        return "redirect:/customers";
-//    }
 
     @GetMapping("/customer/{customer_id}")
     public String viewCustomerById(@PathVariable Integer customer_id, Model model){

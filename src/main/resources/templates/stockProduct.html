@@ -541,30 +541,30 @@
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/adminDashboard}">Ecom Wizards</a>
+                <a class="navbar-brand" th:href="@{/admin}">Ecom Wizards</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a th:href="@{/admin}" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" href="shop.html">Men</a>
-                                <a class="dropdown-item" href="product-single.html">Women</a>
+                                <a class="dropdown-item" th:href="@{/admin/gender(gender='Men')}">Men</a>
+                                <a class="dropdown-item" th:href="@{/admin/gender(gender='Women')}">Women</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="shop.html">Running Shoes</a>
-                                <a class="dropdown-item" href="product-single.html">Sneakers</a>
-                                <a class="dropdown-item" href="cart.html">Outdoor</a>
+                                <a class="dropdown-item" th:href="@{/admin/category(category='Running Shoes')}">Running Shoes</a>
+                                <a class="dropdown-item" th:href="@{/admin/category(category='Sneakers')}">Sneakers</a>
+                                <a class="dropdown-item" th:href="@{/admin/category(category='Outdoor')}">Outdoor</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Logout</a></li>
+                        <li class="nav-item"><a th:href="@{/admin}" class="nav-link">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -587,7 +587,7 @@
                                 <tr>
                                     <td>
                                         <div class="image-container">
-                                            <img th:src="${product.getProdImage()}" style="width: 350px; height: auto;">
+                                            <img th:src="'https://github.com/Nuraina233/CCSD-Capstone-Project-With-SpringBoot/blob/CCSD-Capstone-Project-With-SpringBoot/src/main/resources/images/' + ${product.getProdImage()} + '?raw=true'" style="width: 350px; height: auto;">
                                         </div>
                                     </td>
                                 </tr>
@@ -646,7 +646,7 @@
                     </tr>
                     <tbody>
                     <tr th:each="stock,status : ${stocks}" class="mt-4">
-                        <form th:action="@{/adminDashboard/stock/update}" method="post">
+                        <form th:action="@{/admin/stock/update}" method="post">
                             <table class="table">
                                 <tr>
                                     <th th:text="${stock.getSizes()}" class="text-right"></th>
@@ -655,13 +655,13 @@
                                     </td>
                                     <td>
                                         <div class="d-flex">
-                                            <form th:action="@{/adminDashboard/stock/update}" th:method="post" th:each="product:${products}" style="margin-right: 10px;">
+                                            <form th:action="@{/admin/stock/update}" th:method="post" th:each="product:${products}" style="margin-right: 10px;">
                                                 <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
                                                 <input type="hidden" name="prodId" th:value="${product.getProdId()}">
                                                 <button class="btn btn-success">+</button>
                                             </form>
-                                            <form th:action="@{/adminDashboard/stock/remove}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to remove this item?');">
-                                                <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
+                                            <form th:action="@{/admin/stock/remove}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to remove this item?');">
+                                               <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
                                                 <input type="hidden" name="prodId" th:value="${product.getProdId()}">
                                                 <button class="btn btn-danger">Remove</button>
                                             </form>
@@ -674,7 +674,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex">
-                    <form th:action="@{/adminDashboard/stock/addButton}" th:method="post" class="mr-2" th:each="product:${products}">
+                    <form th:action="@{/admin/stock/addButton}" th:method="post" class="mr-2" th:each="product:${products}">
                         <input type="hidden" name="passProdId" th:value="${product.getProdId()}">
                         <button class="btn btn-success">Add Size</button>
                     </form>

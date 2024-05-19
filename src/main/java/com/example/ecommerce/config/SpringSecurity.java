@@ -1,5 +1,6 @@
 package com.example.ecommerce.config;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,13 +24,11 @@ public class SpringSecurity {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    // Bean to provide PasswordEncoder for encrypting passwords
     @Bean
     public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-    // Configuration for defining security rules and filter chain
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(Customizer.withDefaults())
@@ -65,18 +64,16 @@ public class SpringSecurity {
                 )
                 .logout(
                         logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // URL for logout
-                                .permitAll() // Allow access to logout URL
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .permitAll()
                 );
-        return http.build(); // Build and return the configured HttpSecurity object
+        return http.build();
     }
 
-
-    // Configure global authentication manager to use UserDetailsService and PasswordEncoder
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userDetailsService) // Set UserDetailsService for authentication
-                .passwordEncoder(passwordEncoder()); // Set PasswordEncoder for password encoding
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 }

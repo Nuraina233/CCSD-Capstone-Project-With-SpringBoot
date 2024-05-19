@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Admin</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* General Body Styling */
         body {
@@ -308,7 +307,7 @@
         }
 
         .table img {
-            width: 100px;
+            max-width: 100%;
             height: auto;
             border-radius: 5px;
         }
@@ -396,42 +395,9 @@
             background-color: #495057;
         }
 
-        /* Hero Wrap Styling */
-        .hero-wrap {
-            position: relative;
-            width: 100%;
-            height: 50vh;
-            background-size: cover;
-            background-position: center center;
-        }
 
-        .hero-wrap .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-wrap .slider-text {
-            height: 50vh;
-        }
-
-        .hero-wrap .breadcrumbs {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .hero-wrap .breadcrumbs a {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .hero-wrap .breadcrumbs a:hover {
-            color: #fff;
-        }
-
-        .hero-wrap .bread {
-            color: #fff;
-            font-size: 30px;
-            font-weight: 700;
-        }
     </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -440,46 +406,46 @@
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/adminDashboard}">Ecom Wizards</a>
+                <a class="navbar-brand" th:href="@{/admin}">Ecom Wizards</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a th:href="@{/admin}" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" th:href="@{/adminDashboard/gender(gender='Men')}">Men</a>
-                                <a class="dropdown-item" th:href="@{/adminDashboard/gender(gender='Women')}">Women</a>
+                                <a class="dropdown-item" th:href="@{/admin/gender(gender='Men')}">Men</a>
+                                <a class="dropdown-item" th:href="@{/admin/gender(gender='Women')}">Women</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" th:href="@{/adminDashboard/category(category='Running Shoes')}">Running Shoes</a>
-                                <a class="dropdown-item" th:href="@{/adminDashboard/category(category='Sneakers')}">Sneakers</a>
-                                <a class="dropdown-item" th:href="@{/adminDashboard/category(category='Outdoor')}">Outdoor</a>
+                                <a class="dropdown-item" th:href="@{/admin/category(category='Running Shoes')}">Running Shoes</a>
+                                <a class="dropdown-item" th:href="@{/admin/category(category='Sneakers')}">Sneakers</a>
+                                <a class="dropdown-item" th:href="@{/admin/category(category='Outdoor')}">Outdoor</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a th:href="@{/logout}" class="nav-link">Logout</a></li>
+                        <li class="nav-item"><a th:href="@{/admin}" class="nav-link">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- END nav -->
 
-        <!--        <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">-->
-        <!--            <div class="container">-->
-        <!--                <div class="row no-gutters slider-text align-items-center justify-content-center">-->
-        <!--                    <div class="col-md-9 ftco-animate text-center">-->
-        <!--                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>-->
-        <!--                        <h1 class="mb-0 bread">My Wishlist</h1>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
+<!--                <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">-->
+<!--                    <div class="container">-->
+<!--                        <div class="row no-gutters slider-text align-items-center justify-content-center">-->
+<!--                            <div class="col-md-9 ftco-animate text-center">-->
+<!--                                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>-->
+<!--                                <h1 class="mb-0 bread">My Wishlist</h1>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
     </div>
 </header>
 <!-- End Header Area -->
@@ -490,7 +456,7 @@
         <div class="row col-lg-12">
             <!-- Button column -->
             <div class="col-md-6">
-                <form th:action="@{/adminDashboard/addProduct}" method="post">
+                <form th:action="@{/admin/add}" method="post">
                     <button class="btn btn-primary mb-3">Add Product</button>
                 </form>
             </div>
@@ -519,7 +485,7 @@
                                 <tr>
                                     <td th:text="${product.getProdId()}"></td>
                                     <td th:text="${product.getProdName()}"></td>
-                                    <td><img th:src="@{${product.getProdImage()}}" style="width: 100%; height: auto;"></td>
+                                    <td><img th:src="'https://github.com/Nuraina233/CCSD-Capstone-Project-With-SpringBoot/blob/CCSD-Capstone-Project-With-SpringBoot/src/main/resources/images/' +@{${product.getProdImage()} +'?raw=true'}" style="width: 100%; height: auto;"></td>
                                     <td th:text="${product.getProdPrice()}"></td>
                                     <td th:text="${product.getProdColor()}"></td>
                                     <td th:text="${product.getProdCategory()}"></td>
@@ -528,7 +494,7 @@
                                         <div class="container">
                                             <div class="row justify-content-center mb-2">
                                                 <div class="col-auto">
-                                                    <form th:action="@{/adminDashboard/editProduct}" method="post">
+                                                    <form th:action="@{/admin/editProduct}" method="post">
                                                         <input type="hidden" name="prod_id" th:value="${product.getProdId()}">
                                                         <button type="submit" class="btn btn-success">Edit</button>
                                                     </form>
@@ -536,7 +502,7 @@
                                             </div>
                                             <div class="row justify-content-center mb-2">
                                                 <div class="col-auto">
-                                                    <form th:action="@{/adminDashboard/stock}" method="post">
+                                                    <form th:action="@{/admin/stock}" method="post">
                                                         <input type="hidden" name="prod_id" th:value="${product.getProdId()}">
                                                         <button type="submit" class="btn btn-success">Stock</button>
                                                     </form>
@@ -544,7 +510,7 @@
                                             </div>
                                             <div class="row justify-content-center">
                                                 <div class="col-auto">
-                                                    <form th:action="@{/delete}" method="post" onsubmit="return confirm('Are you sure you want to remove this item?');">
+                                                    <form th:action="@{/admin/deleteProduct}" method="post" onsubmit="return confirm('Are you sure you want to remove this item?');">
                                                         <input type="hidden" name="prod_id" th:value="${product.getProdId()}">
                                                         <button class="btn btn-danger">Delete</button>
                                                     </form>
