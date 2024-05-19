@@ -91,32 +91,35 @@
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                    <form th:action="@{/customers/{id} (id=${customer.customer_id})}" th:object="${customer}" method="POST">
+                    <form th:action="@{/customer/update}" th:object="${customer}" method="POST">
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
                                 <label class="small mb-1" for="firstName">First name</label>
-                                <input class="form-control" id="firstName" type="text" th:field="*{firstName}" placeholder="Enter your first name">
+                                <input class="form-control" id="firstName" type="text" th:field="*{firstName}" placeholder="Enter first name">
                             </div>
                             <div class="col-md-6">
                                 <label class="small mb-1" for="lastName">Last name</label>
-                                <input class="form-control" id="lastName" type="text" th:field="*{lastName}" placeholder="Enter your last name">
+                                <input class="form-control" id="lastName" type="text" th:field="*{lastName}" placeholder="Enter last name">
                             </div>
                         </div>
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
                                 <label class="small mb-1" for="email">Email address</label>
-                                <input class="form-control" id="email" type="text" th:field="*{email}" placeholder="Enter your email address">
+                                <input class="form-control" id="email" type="text" th:field="*{email}" placeholder="Enter email address">
                             </div>
                             <div class="col-md-6">
                                 <label class="small mb-1" for="address">Address</label>
-                                <input class="form-control" id="address" type="text" th:field="*{address}" placeholder="Enter your address">
+                                <input class="form-control" id="address" type="text" th:field="*{address}" placeholder="Enter address">
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="phone">Phone number</label>
-                            <input class="form-control" id="phone" type="tel" th:field="*{phone}" placeholder="Enter your phone number">
+                            <input class="form-control" id="phone" type="tel" th:field="*{phone}" placeholder="Enter phone number">
                         </div>
+                        <!-- Include hidden field for customer ID -->
+                        <input type="hidden" th:field="*{customer_id}" />
                         <button class="btn btn-primary" type="submit">Save changes</button>
+                        <a class="btn btn-secondary" th:href="@{/customer/detail}">Cancel</a> <!-- Link to cancel action -->
                     </form>
                 </div>
             </div>
