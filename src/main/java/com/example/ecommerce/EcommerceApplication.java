@@ -12,9 +12,9 @@ public class EcommerceApplication {
 		SpringApplication.run(EcommerceApplication.class, args);
 	}
 
-	@RequestMapping("/error")
-	public String handleError() {
-		// Handle the error gracefully, e.g., display a custom error page
-		return "Error";
-	}
+//	@RequestMapping("/error")
+//	public String handleError() {
+//		// Handle the error gracefully, e.g., display a custom error page
+//		return "Error";
+//	}
 }
