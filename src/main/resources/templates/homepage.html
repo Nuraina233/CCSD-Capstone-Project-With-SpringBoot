@@ -610,7 +610,22 @@
                                 <a class="dropdown-item" th:href="@{/home/category(category='Outdoor')}">Outdoor</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a th:href="@{/home}" class="nav-link">Logout</a></li>
+                        <!-- Check if user is logged in -->
+                        <li class="nav-item dropdown active" th:if="${not #authorization.expression('isAuthenticated()')}">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown05">
+                                <a class="dropdown-item" th:href="@{/login}" >Login</a>
+                            </div>
+                        </li>
+                        <!-- If user is logged in, display logout option -->
+                        <li class="nav-item dropdown active" th:if="${#authorization.expression('isAuthenticated()')}">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown06">
+                                <a class="dropdown-item" th:href="@{/customer/edit}" >edit profile</a>
+                                <a class="dropdown-item" th:href="@{/logout}" >Logout</a>
+
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
