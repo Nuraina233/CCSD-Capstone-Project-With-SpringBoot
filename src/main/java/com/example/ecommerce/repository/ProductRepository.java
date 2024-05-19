@@ -2,7 +2,6 @@ package com.example.ecommerce.repository;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.example.ecommerce.models.Stocks;
@@ -29,7 +28,11 @@ public class ProductRepository {
 
         //getRemoveStock(1520);
 
-        getInsertStock(4,40.5,100);
+        //getInsertStock(4,40.5,100);
+
+        //getProductByGenderList("Women");
+
+        getProductByCategoryList("Running Shoes");
     }
 
     //all products
@@ -117,7 +120,7 @@ public class ProductRepository {
 
 
     //retrieve the product of specific product id
-    public static Products getEditProduct(int passId) throws SQLException {
+    public static Products getProductById(int passId) throws SQLException {
         Products products = null;
         try {
             //connect to database
@@ -166,10 +169,112 @@ public class ProductRepository {
         return products;
     }
 
+    //retrieve the product of specific product by gender
+    public static List<Products> getProductByGenderList(String passGender) throws SQLException {
+        productsList.clear();
+        try {
+            //connect to database
+            connection = DriverManager.getConnection(jdbcUrl, username, password);
+
+            //create a statement
+            String sql = "SELECT * FROM " + tableName + " WHERE gender = ?";
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Set the parameter value for the product_id placeholder
+            preparedStatement.setString(1, passGender);
+
+            //execute the query to retrieve data
+            resultSet = preparedStatement.executeQuery();
+
+            //print data
+            while (resultSet.next()) {
+                int id = resultSet.getInt(idColumn);
+                String name = resultSet.getString(nameColumn);
+
+                String image = resultSet.getString(imageColumn);
+                double price = resultSet.getDouble(priceColumn);
+                String desc = resultSet.getString(descColumn);
+                String color = resultSet.getString(colorColumn);
+                String category = resultSet.getString(categoryColumn);
+                String gender = passGender;
+                Products products = new Products(id, name, image, price, desc, color, category, gender);
+                productsList.add(products);
+            }
+
+            System.out.println("Retrieve Product by product gender " +passGender);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return productsList;
+    }
+
+    //retrieve the product of specific product by category
+    public static List<Products> getProductByCategoryList(String passCat) throws SQLException {
+        productsList.clear();
+        try {
+            //connect to database
+            connection = DriverManager.getConnection(jdbcUrl, username, password);
+
+            //create a statement
+            String sql = "SELECT * FROM " + tableName + " WHERE category = ?";
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Set the parameter value for the product_id placeholder
+            preparedStatement.setString(1, passCat);
+
+            //execute the query to retrieve data
+            resultSet = preparedStatement.executeQuery();
+
+            //print data
+            while (resultSet.next()) {
+                int id = resultSet.getInt(idColumn);
+                String name = resultSet.getString(nameColumn);
+
+                String image = resultSet.getString(imageColumn);
+                double price = resultSet.getDouble(priceColumn);
+                String desc = resultSet.getString(descColumn);
+                String color = resultSet.getString(colorColumn);
+                String category = passCat;
+                String gender = resultSet.getString(genderColumn);
+                Products products = new Products(id, name, image, price, desc, color, category, gender);
+                productsList.add(products);
+            }
+
+            System.out.println("Retrieve Product by product gender " +passCat);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return productsList;
+    }
+
     //update product by id
     public static void getUpdateProduct(int passId, String nameToUpdate, String imageToUpdate,
-                        double priceToUpdate, String descToUpdate, String colorToUpdate,
-                        String catToUpdate, String genderToUpdate) throws SQLException {
+                                        double priceToUpdate, String descToUpdate, String colorToUpdate,
+                                        String catToUpdate, String genderToUpdate) throws SQLException {
         try {
             //connect to database
             connection = DriverManager.getConnection(jdbcUrl, username, password);

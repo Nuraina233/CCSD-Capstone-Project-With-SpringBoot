@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Controller
 public class ProductController {
 
-    @GetMapping("/productAdmin")
-    public String getCustomers(Model model) throws SQLException {
+    @GetMapping("/adminDashboard")
+    public String adminPage(Model model) throws SQLException {
         List<Products> products = ProductRepository.getProductList();
 
 
@@ -29,7 +28,7 @@ public class ProductController {
         return "adminPage";
     }
 
-    @PostMapping("/productAdmin/editProduct")
+    @PostMapping("/adminDashboard/editProduct")
     public String editProductPage(@RequestParam("prod_id") int id, Model model) throws SQLException {
 
         List<String> categories = new ArrayList<>();
@@ -44,7 +43,7 @@ public class ProductController {
         genders.add("Women");
 
         //get the list of product that want to edit
-        Products products = ProductRepository.getEditProduct(id);
+        Products products = ProductRepository.getProductById(id);
         model.addAttribute("products", products);
         model.addAttribute("genders", genders);
         model.addAttribute("categories", categories);
@@ -64,19 +63,19 @@ public class ProductController {
         model.addAttribute("products", products);
 
         // Return the result page
-        return "redirect:/productAdmin";
+        return "redirect:/adminDashboard";
     }
 
     @PostMapping("/update")
     public String updateProduct(@RequestParam("passId") String passId,
-                         @RequestParam("passName") String passName,
-                         @RequestParam("passImage") String passImage,
-                         @RequestParam("passPrice") String passPrice,
-                         @RequestParam("passDesc") String passDesc,
-                         @RequestParam("passColor") String passColor,
-                         @RequestParam("passCategory") String passCategory,
-                         @RequestParam("passGender") String passGender,
-                         Model model) throws SQLException {
+                                @RequestParam("passName") String passName,
+                                @RequestParam("passImage") String passImage,
+                                @RequestParam("passPrice") String passPrice,
+                                @RequestParam("passDesc") String passDesc,
+                                @RequestParam("passColor") String passColor,
+                                @RequestParam("passCategory") String passCategory,
+                                @RequestParam("passGender") String passGender,
+                                Model model) throws SQLException {
 
         ProductRepository dp = new ProductRepository();
         dp.getUpdateProduct(Integer.parseInt(passId),passName,passImage,Double.parseDouble(passPrice),passDesc,passColor,passCategory,passGender);
@@ -85,10 +84,10 @@ public class ProductController {
         List<Products> products = ProductRepository.getProductList();
         model.addAttribute("products", products);
 
-        return "redirect:/productAdmin";
+        return "redirect:/adminDashboard";
     }
 
-    @PostMapping("/productAdmin/addProduct")
+    @PostMapping("/adminDashboard/addProduct")
     public String addProductPage(Model model) throws SQLException {
 
         // Add the list of products to the model
@@ -101,20 +100,18 @@ public class ProductController {
     @PostMapping("/back")
     public String back(){
 
-        return "redirect:/productAdmin";
+        return "redirect:/adminDashboard";
     }
-
-
 
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam("passName") String passName,
-                                 @RequestParam("passImage") String passImage,
-                                 @RequestParam("passPrice") String passPrice,
-                                 @RequestParam("passDesc") String passDesc,
-                                 @RequestParam("passColor") String passColor,
-                                 @RequestParam("passCategory") String passCategory,
-                                 @RequestParam("passGender") String passGender,
-                                 Model model) throws SQLException {
+                             @RequestParam("passImage") String passImage,
+                             @RequestParam("passPrice") String passPrice,
+                             @RequestParam("passDesc") String passDesc,
+                             @RequestParam("passColor") String passColor,
+                             @RequestParam("passCategory") String passCategory,
+                             @RequestParam("passGender") String passGender,
+                             Model model) throws SQLException {
 
         ProductRepository dp = new ProductRepository();
         dp.getInsertProduct(passName,passImage,Double.parseDouble(passPrice),passDesc,passColor,passCategory,passGender);
@@ -123,14 +120,35 @@ public class ProductController {
         List<Products> products = ProductRepository.getProductList();
         model.addAttribute("products", products);
 
-        return "redirect:/productAdmin";
+        return "redirect:/adminDashboard";
     }
 
-    @PostMapping("/productAdmin/stock")
+    @GetMapping("/adminDashboard/gender")
+    public String genderPage(@RequestParam String gender, Model model) throws SQLException {
+
+        //List the product by Gender
+        List<Products> products = ProductRepository.getProductByGenderList(gender);
+        model.addAttribute("products", products);
+
+        return "adminPage";
+    }
+
+    @GetMapping("/adminDashboard/category")
+    public String categoryPage(@RequestParam String category, Model model) throws SQLException {
+
+        //List the product by category
+        List<Products> products = ProductRepository.getProductByCategoryList(category);
+        model.addAttribute("products", products);
+
+        return "adminPage";
+    }
+
+
+    @PostMapping("/adminDashboard/stock")
     public String stockProductPage(@RequestParam("prod_id") int id, Model model) throws SQLException {
 
         //List the product by Id
-        Products products = ProductRepository.getEditProduct(id);
+        Products products = ProductRepository.getProductById(id);
         model.addAttribute("products", products);
 
         //List of stock by product id
@@ -140,7 +158,7 @@ public class ProductController {
         return "stockProduct";
     }
 
-    @PostMapping("/productAdmin/stock/remove")
+    @PostMapping("/adminDashboard/stock/remove")
     public String removeStock(@RequestParam("stockId") int stockId,
                               @RequestParam("prodId") int prodId,
                               Model model) throws SQLException {
@@ -149,7 +167,7 @@ public class ProductController {
         ProductRepository.getRemoveStock(stockId);
 
         //List the product by Id
-        Products products = ProductRepository.getEditProduct(prodId);
+        Products products = ProductRepository.getProductById(prodId);
         model.addAttribute("products", products);
 
         //List of stock by product id
@@ -159,12 +177,12 @@ public class ProductController {
         return "stockProduct";
     }
 
-    @PostMapping("/productAdmin/stock/addButton")
+    @PostMapping("/adminDashboard/stock/addButton")
     public String addStockButton(@RequestParam("passProdId") int id,
-                              Model model) throws SQLException {
+                                 Model model) throws SQLException {
 
         //List the product by Id
-        Products products = ProductRepository.getEditProduct(id);
+        Products products = ProductRepository.getProductById(id);
         model.addAttribute("products", products);
 
         //List of stock by product id
@@ -174,17 +192,17 @@ public class ProductController {
         return "addStock";
     }
 
-    @PostMapping("/productAdmin/stock/addStock")
+    @PostMapping("/adminDashboard/stock/addStock")
     public String addStock(@RequestParam("prodId") int prodId,
                            @RequestParam("passSize") double passSize,
                            @RequestParam("passStock") int passStock,
-                              Model model) throws SQLException {
+                           Model model) throws SQLException {
 
         //get the list of product that want to edit
         ProductRepository.getInsertStock(prodId, passSize, passStock);
 
         //List the product by Id
-        Products products = ProductRepository.getEditProduct(prodId);
+        Products products = ProductRepository.getProductById(prodId);
         model.addAttribute("products", products);
 
         //List of stock by product id
@@ -195,7 +213,7 @@ public class ProductController {
     }
 
 
-    @PostMapping("/productAdmin/stock/update")
+    @PostMapping("/adminDashboard/stock/update")
     public String updateStock(@RequestParam("stockId") int stockId,
                               @RequestParam("prodId") int prodId,
                               @RequestParam("passStockQty") int passStockQty,
@@ -205,7 +223,7 @@ public class ProductController {
         ProductRepository.getUpdateStock(passStockQty, stockId);
 
         //List the product by Id
-        Products products = ProductRepository.getEditProduct(prodId);
+        Products products = ProductRepository.getProductById(prodId);
         model.addAttribute("products", products);
 
         //List of stock by product id

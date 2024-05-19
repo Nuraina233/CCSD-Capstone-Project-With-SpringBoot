@@ -541,14 +541,14 @@
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/productAdmin}">Ecom Wizards</a>
+                <a class="navbar-brand" th:href="@{/adminDashboard}">Ecom Wizards</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a th:href="@{/productAdmin}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -564,7 +564,7 @@
                                 <a class="dropdown-item" href="cart.html">Outdoor</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a th:href="@{/productAdmin}" class="nav-link">Logout</a></li>
+                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -646,34 +646,35 @@
                     </tr>
                     <tbody>
                     <tr th:each="stock,status : ${stocks}" class="mt-4">
-                        <form th:action="@{/productAdmin/stock/update}" method="post">
-                        <table class="table">
-                            <tr>
-                                <th th:text="${stock.getSizes()}" class="text-right"></th>
-                                <td style="text-align: left;">
-                                    <input type="number" name="passStockQty" class="form-control input-width" style="text-align: center;width:100px;" th:value="${stock.getStocks()}" min="1">
-                                </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <form th:action="@{/productAdmin/stock/update}" th:method="post" th:each="product:${products}" style="margin-right: 10px;">
-                                            <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
-                                            <input type="hidden" name="prodId" th:value="${product.getProdId()}">
-                                            <button class="btn btn-success">+</button>
-                                        </form>
-                                        <form th:action="@{/productAdmin/stock/remove}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to remove this item?');">
-                                            <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
-                                            <input type="hidden" name="prodId" th:value="${product.getProdId()}">
-                                            <button class="btn btn-danger">Remove</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <form th:action="@{/adminDashboard/stock/update}" method="post">
+                            <table class="table">
+                                <tr>
+                                    <th th:text="${stock.getSizes()}" class="text-right"></th>
+                                    <td style="text-align: left;">
+                                        <input type="number" name="passStockQty" class="form-control input-width" style="text-align: center;width:100px;" th:value="${stock.getStocks()}" min="1">
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <form th:action="@{/adminDashboard/stock/update}" th:method="post" th:each="product:${products}" style="margin-right: 10px;">
+                                                <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
+                                                <input type="hidden" name="prodId" th:value="${product.getProdId()}">
+                                                <button class="btn btn-success">+</button>
+                                            </form>
+                                            <form th:action="@{/adminDashboard/stock/remove}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to remove this item?');">
+                                                <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
+                                                <input type="hidden" name="prodId" th:value="${product.getProdId()}">
+                                                <button class="btn btn-danger">Remove</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                     </tr>
                     </tbody>
                 </table>
                 <div class="d-flex">
-                    <form th:action="@{/productAdmin/stock/addButton}" th:method="post" class="mr-2" th:each="product:${products}">
+                    <form th:action="@{/adminDashboard/stock/addButton}" th:method="post" class="mr-2" th:each="product:${products}">
                         <input type="hidden" name="passProdId" th:value="${product.getProdId()}">
                         <button class="btn btn-success">Add Size</button>
                     </form>

@@ -440,30 +440,30 @@
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/productAdmin}">Ecom Wizards</a>
+                <a class="navbar-brand" th:href="@{/adminDashboard}">Ecom Wizards</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a th:href="@{/productAdmin}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" href="shop.html">Men</a>
-                                <a class="dropdown-item" href="product-single.html">Women</a>
+                                <a class="dropdown-item" th:href="@{/adminDashboard/gender(gender='Men')}">Men</a>
+                                <a class="dropdown-item" th:href="@{/adminDashboard/gender(gender='Women')}">Women</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="shop.html">Running Shoes</a>
-                                <a class="dropdown-item" href="product-single.html">Sneakers</a>
-                                <a class="dropdown-item" href="cart.html">Outdoor</a>
+                                <a class="dropdown-item" th:href="@{/adminDashboard/category(category='Running Shoes')}">Running Shoes</a>
+                                <a class="dropdown-item" th:href="@{/adminDashboard/category(category='Sneakers')}">Sneakers</a>
+                                <a class="dropdown-item" th:href="@{/adminDashboard/category(category='Outdoor')}">Outdoor</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a th:href="@{/productAdmin}" class="nav-link">Logout</a></li>
+                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -490,7 +490,7 @@
         <div class="row col-lg-12">
             <!-- Button column -->
             <div class="col-md-6">
-                <form th:action="@{/productAdmin/addProduct}" method="post">
+                <form th:action="@{/adminDashboard/addProduct}" method="post">
                     <button class="btn btn-primary mb-3">Add Product</button>
                 </form>
             </div>
@@ -528,7 +528,7 @@
                                         <div class="container">
                                             <div class="row justify-content-center mb-2">
                                                 <div class="col-auto">
-                                                    <form th:action="@{/productAdmin/editProduct}" method="post">
+                                                    <form th:action="@{/adminDashboard/editProduct}" method="post">
                                                         <input type="hidden" name="prod_id" th:value="${product.getProdId()}">
                                                         <button type="submit" class="btn btn-success">Edit</button>
                                                     </form>
@@ -536,7 +536,7 @@
                                             </div>
                                             <div class="row justify-content-center mb-2">
                                                 <div class="col-auto">
-                                                    <form th:action="@{/productAdmin/stock}" method="post">
+                                                    <form th:action="@{/adminDashboard/stock}" method="post">
                                                         <input type="hidden" name="prod_id" th:value="${product.getProdId()}">
                                                         <button type="submit" class="btn btn-success">Stock</button>
                                                     </form>

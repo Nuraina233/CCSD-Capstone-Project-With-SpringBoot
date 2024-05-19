@@ -567,14 +567,14 @@
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/productAdmin}">Ecom Wizards</a>
+                <a class="navbar-brand" th:href="@{/adminDashboard}">Ecom Wizards</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a th:href="@{/productAdmin}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -591,7 +591,7 @@
                             </div>
                         </li>
 
-                        <li class="nav-item"><a th:href="@{/productAdmin}" class="nav-link">Logout</a></li>
+                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -673,7 +673,7 @@
                     </tr>
                     <tbody>
                     <tr th:each="stock,status : ${stocks}" class="mt-4">
-                        <form th:action="@{/productAdmin/stock/update}" method="post">
+                        <form th:action="@{/adminDashboard/stock/update}" method="post">
                             <table class="table">
                                 <tr>
                                     <th th:text="${stock.getSizes()}" class="text-right"></th>
@@ -682,12 +682,12 @@
                                     </td>
                                     <td>
                                         <div class="d-flex">
-                                            <form th:action="@{/productAdmin/stock/update}" th:method="post" th:each="product:${products}" style="margin-right: 10px;">
+                                            <form th:action="@{/adminDashboard/stock/update}" th:method="post" th:each="product:${products}" style="margin-right: 10px;">
                                                 <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
                                                 <input type="hidden" name="prodId" th:value="${product.getProdId()}">
                                                 <button class="btn btn-success">+</button>
                                             </form>
-                                            <form th:action="@{/productAdmin/stock/remove}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to remove this item?');">
+                                            <form th:action="@{/adminDashboard/stock/remove}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to remove this item?');">
                                                 <input type="hidden" name="stockId" th:value="${stock.getStockId()}">
                                                 <input type="hidden" name="prodId" th:value="${product.getProdId()}">
                                                 <button class="btn btn-danger">Remove</button>
@@ -700,7 +700,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <form th:action="@{/productAdmin/stock/addStock}" method="post">
+                <form th:action="@{/adminDashboard/stock/addStock}" method="post">
                     <div style="display: flex; align-items: center;">
                         <input name="passSize" style="width: 100px; margin-right: 10px;" placeholder="Size...">
 
@@ -714,14 +714,14 @@
                             </div>
                         </div>
 
-                        <form th:action="@{/productAdmin/stock/addStock}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to add this item?');" style="margin: 0;">
+                        <form th:action="@{/adminDashboard/stock/addStock}" th:method="post" th:each="product:${products}" onsubmit="return confirm('Are you sure you want to add this item?');" style="margin: 0;">
                             <input type="hidden" name="prodId" th:value="${product.getProdId()}">
                             <button class="btn btn-success">Add</button>
                         </form>
                     </div>
                 </form>
                 <div class="d-flex">
-                    <form th:action="@{/productAdmin/stock/addButton}" th:method="post" class="mr-2" th:each="product:${products}">
+                    <form th:action="@{/adminDashboard/stock/addButton}" th:method="post" class="mr-2" th:each="product:${products}">
                         <input type="hidden" name="passProdId" th:value="${product.getProdId()}">
                         <button class="btn btn-success">Add Size</button>
                     </form>
@@ -731,6 +731,15 @@
         </div>
     </div>
 </section>
+<script>
+    function changeSize(amount) {
+        const sizeInput = document.getElementById('sizeInput');
+        let currentValue = parseInt(sizeInput.value, 10);
+        currentValue += amount;
+        if (currentValue < 1) currentValue = 1; // Ensure the value does not go below 1
+        sizeInput.value = currentValue;
+    }
+</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
