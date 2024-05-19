@@ -82,10 +82,7 @@ package com.example.ecommerce.controller;
 //}
 import com.example.ecommerce.models.Orders;
 import com.example.ecommerce.models.OrdersProduct;
-<<<<<<< Updated upstream
-=======
 import com.example.ecommerce.repository.OrderRepository;
->>>>>>> Stashed changes
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -97,17 +94,6 @@ import java.util.List;
 public class OrderController {
 
 //    @GetMapping("/cart")
-<<<<<<< Updated upstream
-//    public String showCart(Model model) throws SQLException {
-//        Retrieve the current order or cart
-////        List<OrdersProduct> currentOrder = DisplayOrders.getOrdersList(); // You need to implement this method
-//
-//        System.out.println(currentOrder);
-//        model.addAttribute("orders", currentOrder);
-//
-//        return "cart";
-//    }
-=======
 //    public ModelAndView showCart() {
 //        // Retrieve the current order or cart
 //        Orders currentOrder = getCurrentOrder(); // You need to implement this method
@@ -126,7 +112,6 @@ public class OrderController {
 
         return "cart";
     }
->>>>>>> Stashed changes
 
     @PostMapping("/cart/addProduct")
     public String addProductToOrder(@RequestParam("orderId") int orderId,
