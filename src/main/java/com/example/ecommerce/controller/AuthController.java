@@ -3,7 +3,7 @@ package com.example.ecommerce.controller;
 import jakarta.validation.Valid;
 import com.example.ecommerce.dto.UserDto;
 import com.example.ecommerce.entity.User;
-import com.example.ecommerce.service.*;
+import com.example.ecommerce.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,53 +22,58 @@ public class AuthController {
         this.userService = userService;
     }
 
-    // handler method to handle home page request
+    // Handler method to handle home page request
     @GetMapping("/index")
     public String home(){
-        return "index";
+        return "index"; // Return the view name for the home page
     }
 
-    // handler method to handle login request
+    // Handler method to handle login request
     @GetMapping("/login")
     public String login(){
-        return "login";
+        return "login"; // Return the view name for the login page
     }
 
-    // handler method to handle user registration form request
+    // Handler method to handle user registration form request
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
-        // create model object to store form data
+        // Create a model object to store form data
         UserDto user = new UserDto();
-        model.addAttribute("user", user);
-        return "register";
+        model.addAttribute("user", user); // Add user object to the model
+        return "register"; // Return the view name for the registration form
     }
 
-    // handler method to handle user registration form submit request
+    // Handler method to handle user registration form submit request
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
                                Model model){
+        // Check if user with the same email already exists
         User existingUser = userService.findUserByEmail(userDto.getEmail());
 
+        // If user already exists, reject the registration with an error message
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");
         }
 
+        // If there are validation errors, return to the registration form with the error messages
         if(result.hasErrors()){
             model.addAttribute("user", userDto);
             return "/register";
         }
 
+        // Save the user if there are no errors and redirect to the registration page with success message
         userService.saveUser(userDto);
         return "redirect:/register?success";
     }
 
-    // handler method to handle list of users
+    // Handler method to handle list of users
     @GetMapping("/users")
     public String users(Model model){
+        // Retrieve list of users from the service
         List<UserDto> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "users";
+        model.addAttribute("users", users); // Add users list to the model
+        return "users"; // Return the view name for the users list page
     }
 }

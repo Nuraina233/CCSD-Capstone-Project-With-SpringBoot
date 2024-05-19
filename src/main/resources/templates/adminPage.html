@@ -1,12 +1,128 @@
 <!DOCTYPE html>
-<html lang="zxx" class="no-js" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="zxx" class="no-js" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 
 <head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Admin</title>
+    <!-- Site Title -->
+    <title>Ecom Wizards</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Section Styling */
+        .section_gap {
+            padding: 50px 0;
+        }
+
+        /* Container Styling */
+        .container {
+            margin-bottom: 10px;
+        }
+        .containerproduct {
+            margin: 0 15px;
+            border: 1px solid #ccc; /* Added border */
+            padding: 20px; /* Added padding */
+            border-radius: 5px; /* Added border radius */
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc; /* Added border */
+            border-radius: 5px; /* Added border radius */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        input[type="text"],
+            input[type="number"],
+            select {
+                width: calc(100% - 16px); /* Use this or the fixed width, not both */
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                resize: vertical;
+                /* Remove conflicting width property */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
+            }
+
+            /* Adjusting the fixed width */
+            input[type="text"].fixed-width,
+            input[type="number"].fixed-width,
+            select.fixed-width {
+                width: 300px; /* Set your desired fixed width */
+            }
+
+
+        textarea {
+            width: calc(100% - 16px); /* Adjusted width */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+            min-height: 150px; /* Added minimum height */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
+        }
+
+        /* Button Styling */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .btn-outline-secondary,
+        .btn-success {
+            background-color: #8d8257; /* Fallback color */
+            border-color: #8d8257;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: bold;
+            padding: 5px 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline-secondary,
+        .btn-success:hover {
+            background-color: #dbcc8f;
+            border-color: #8d8257;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
         /* General Body Styling */
         body {
             font-family: Arial, sans-serif;
@@ -435,54 +551,45 @@
 </head>
 
 <body>
+
 <!-- Start Header Area -->
 <header class="header_area sticky-header">
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/adminDashboard}">Ecom Wizards</a>
+                <a class="navbar-brand" th:href="@{/admin}">Ecom Wizards</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a th:href="@{/admin}" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" th:href="@{/adminDashboard/gender(gender='Men')}">Men</a>
-                                <a class="dropdown-item" th:href="@{/adminDashboard/gender(gender='Women')}">Women</a>
+                                <a class="dropdown-item" th:href="@{/admin/gender(gender='Men')}">Men</a>
+                                <a class="dropdown-item" th:href="@{/admin/gender(gender='Women')}">Women</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" th:href="@{/adminDashboard/category(category='Running Shoes')}">Running Shoes</a>
-                                <a class="dropdown-item" th:href="@{/adminDashboard/category(category='Sneakers')}">Sneakers</a>
-                                <a class="dropdown-item" th:href="@{/adminDashboard/category(category='Outdoor')}">Outdoor</a>
+                                <a class="dropdown-item" th:href="@{/admin/category(category='Running Shoes')}">Running Shoes</a>
+                                <a class="dropdown-item" th:href="@{/admin/category(category='Sneakers')}">Sneakers</a>
+                                <a class="dropdown-item" th:href="@{/admin/category(category='Outdoor')}">Outdoor</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a th:href="@{/adminDashboard}" class="nav-link">Logout</a></li>
+                        <li class="nav-item"><a th:href="@{/logout}" class="nav-link">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- END nav -->
-
-        <!--        <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">-->
-        <!--            <div class="container">-->
-        <!--                <div class="row no-gutters slider-text align-items-center justify-content-center">-->
-        <!--                    <div class="col-md-9 ftco-animate text-center">-->
-        <!--                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>-->
-        <!--                        <h1 class="mb-0 bread">My Wishlist</h1>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
     </div>
 </header>
 <!-- End Header Area -->
+
 
 <section class="product_list_area section_gap">
     <div class="container" style="padding: 50px 0px">
@@ -490,7 +597,7 @@
         <div class="row col-lg-12">
             <!-- Button column -->
             <div class="col-md-6">
-                <form th:action="@{/adminDashboard/addProduct}" method="post">
+                <form th:action="@{/admin/add}" method="post">
                     <button class="btn btn-primary mb-3">Add Product</button>
                 </form>
             </div>
@@ -519,7 +626,7 @@
                                 <tr>
                                     <td th:text="${product.getProdId()}"></td>
                                     <td th:text="${product.getProdName()}"></td>
-                                    <td><img th:src="@{${product.getProdImage()}}" style="width: 100%; height: auto;"></td>
+                                    <td><img th:src="'https://github.com/Nuraina233/CCSD-Capstone-Project-With-SpringBoot/blob/CCSD-Capstone-Project-With-SpringBoot/src/main/resources/images/' +@{${product.getProdImage()} +'?raw=true'}" style="width: 100%; height: auto;"></td>
                                     <td th:text="${product.getProdPrice()}"></td>
                                     <td th:text="${product.getProdColor()}"></td>
                                     <td th:text="${product.getProdCategory()}"></td>
@@ -528,7 +635,7 @@
                                         <div class="container">
                                             <div class="row justify-content-center mb-2">
                                                 <div class="col-auto">
-                                                    <form th:action="@{/adminDashboard/editProduct}" method="post">
+                                                    <form th:action="@{/admin/editProduct}" method="post">
                                                         <input type="hidden" name="prod_id" th:value="${product.getProdId()}">
                                                         <button type="submit" class="btn btn-success">Edit</button>
                                                     </form>
@@ -536,7 +643,7 @@
                                             </div>
                                             <div class="row justify-content-center mb-2">
                                                 <div class="col-auto">
-                                                    <form th:action="@{/adminDashboard/stock}" method="post">
+                                                    <form th:action="@{/admin/stock}" method="post">
                                                         <input type="hidden" name="prod_id" th:value="${product.getProdId()}">
                                                         <button type="submit" class="btn btn-success">Stock</button>
                                                     </form>
@@ -544,7 +651,7 @@
                                             </div>
                                             <div class="row justify-content-center">
                                                 <div class="col-auto">
-                                                    <form th:action="@{/delete}" method="post" onsubmit="return confirm('Are you sure you want to remove this item?');">
+                                                    <form th:action="@{/admin/deleteProduct}" method="post" onsubmit="return confirm('Are you sure you want to remove this item?');">
                                                         <input type="hidden" name="prod_id" th:value="${product.getProdId()}">
                                                         <button class="btn btn-danger">Delete</button>
                                                     </form>

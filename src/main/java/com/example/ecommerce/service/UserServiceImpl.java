@@ -1,6 +1,5 @@
 package com.example.ecommerce.service;
 
-
 import com.example.ecommerce.dto.UserDto;
 import com.example.ecommerce.entity.*;
 import com.example.ecommerce.repository.RoleRepository;
@@ -27,16 +26,18 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // Method to save a new user
     @Override
     public void saveUser(UserDto userDto) {
         User user = new User();
         user.setFirst_name(userDto.getFirstName());
         user.setLast_name(userDto.getLastName());
         user.setEmail(userDto.getEmail());
-        // encrypt the password using spring security
+        // Encrypt the password using Spring Security's password encoder
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        Role role = roleRepository.findByName("ROLE_ADMIN");
+        // Find the ROLE_USER role or create it if it doesn't exist
+        Role role = roleRepository.findByName("ROLE_USER");
         if(role == null){
             role = checkRoleExist();
         }
@@ -44,11 +45,13 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    // Method to find a user by email
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    // Method to retrieve all users and map them to DTOs
     @Override
     public List<UserDto> findAllUsers() {
         List<User> users = userRepository.findAll();
@@ -57,6 +60,7 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    // Method to map User entity to UserDto
     private UserDto mapToUserDto(User user){
         UserDto userDto = new UserDto();
 
@@ -66,9 +70,10 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
+    // Method to check if ROLE_USER role exists, create it if not, and return it
     private Role checkRoleExist(){
         Role role = new Role();
-        role.setName("ROLE_ADMIN");
+        role.setName("ROLE_USER");
         return roleRepository.save(role);
     }
 }

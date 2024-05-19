@@ -22,23 +22,28 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    // Load user details by username (email in this case)
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        // Retrieve the user by email from the database
         User user = userRepository.findByEmail(email);
 
+        // If user is found, create UserDetails object with user details
         if (user != null) {
             return new org.springframework.security.core.userdetails.User(user.getEmail(),
                     user.getPassword(),
-                    mapRolesToAuthorities(user.getRoles()));
-        }else{
+                    mapRolesToAuthorities(user.getRoles())); // Map user roles to authorities
+        } else {
+            // If user is not found, throw UsernameNotFoundException
             throw new UsernameNotFoundException("Invalid username or password.");
         }
     }
 
-    private Collection < ? extends GrantedAuthority> mapRolesToAuthorities(Collection <Role> roles) {
-        Collection < ? extends GrantedAuthority> mapRoles = roles.stream()
+    // Method to map user roles to Spring Security authorities
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        // Convert roles to SimpleGrantedAuthority objects
+        return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
-        return mapRoles;
     }
 }
