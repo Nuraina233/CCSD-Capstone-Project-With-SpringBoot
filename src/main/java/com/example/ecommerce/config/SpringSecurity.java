@@ -32,14 +32,23 @@ public class SpringSecurity {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
+<<<<<<< Updated upstream
                                 .requestMatchers("/cart").permitAll()
                                 .requestMatchers("/customer/**").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
+=======
+                                .requestMatchers("/home").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+>>>>>>> Stashed changes
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
+<<<<<<< Updated upstream
                                 .defaultSuccessUrl("/customer/1")
+=======
+                                .defaultSuccessUrl("/admin")
+>>>>>>> Stashed changes
                                 .permitAll()
                 ).logout(
                         logout -> logout
