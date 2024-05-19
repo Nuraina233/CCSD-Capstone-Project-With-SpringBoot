@@ -14,10 +14,10 @@ public class HomepageController {
 
     @GetMapping("/home")
     public String homepage(Model model) throws SQLException {
-        List<Products> products1 = ProductRepository.getProductList();
+        List<Products> products = ProductRepository.getProductList();
 
         // Add the list of products to the model
-        model.addAttribute("products", products1);
+        model.addAttribute("products", products);
 
         // Return the view name (HTML file)
         return "homepage";

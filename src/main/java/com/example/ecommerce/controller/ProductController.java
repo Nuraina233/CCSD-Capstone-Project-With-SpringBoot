@@ -27,6 +27,26 @@ public class ProductController {
         return "adminPage";
     }
 
+    @GetMapping("/admin/gender")
+    public String genderPage(@RequestParam String gender, Model model) throws SQLException {
+
+        //List the product by Gender
+        List<Products> products = ProductRepository.getProductByGenderList(gender);
+        model.addAttribute("products", products);
+
+        return "adminPage";
+    }
+
+    @GetMapping("/admin/category")
+    public String categoryPage(@RequestParam String category, Model model) throws SQLException {
+
+        //List the product by category
+        List<Products> products = ProductRepository.getProductByCategoryList(category);
+        model.addAttribute("products", products);
+
+        return "adminPage";
+    }
+
     @PostMapping("/admin/editProduct")
     public String editProductPage(@RequestParam("prod_id") int id, Model model) throws SQLException {
 
@@ -51,20 +71,6 @@ public class ProductController {
         return "editProduct";
     }
 
-    @PostMapping("/admin/deleteProduct")
-    public String deleteProduct(@RequestParam("prod_id") int id, Model model) throws SQLException {
-
-        //get the list of product that want to edit
-        ProductRepository.getDeleteProduct(id);
-
-        // Add the list of products to the model
-        List<Products> products = ProductRepository.getProductList();
-        model.addAttribute("products", products);
-
-        // Return the result page
-        return "redirect:/admin";
-    }
-
     @PostMapping("/admin/editProduct/updateProduct")
     public String updateProduct(@RequestParam("passId") String passId,
                                 @RequestParam("passName") String passName,
@@ -86,6 +92,20 @@ public class ProductController {
         return "redirect:/admin";
     }
 
+    @PostMapping("/admin/deleteProduct")
+    public String deleteProduct(@RequestParam("prod_id") int id, Model model) throws SQLException {
+
+        //get the list of product that want to edit
+        ProductRepository.getDeleteProduct(id);
+
+        // Add the list of products to the model
+        List<Products> products = ProductRepository.getProductList();
+        model.addAttribute("products", products);
+
+        // Return the result page
+        return "redirect:/admin";
+    }
+
     @PostMapping("/admin/add")
     public String addProductPage(Model model) throws SQLException {
 
@@ -94,12 +114,6 @@ public class ProductController {
         model.addAttribute("products", products);
 
         return "addProduct";
-    }
-
-    @PostMapping("/admin/back")
-    public String back(){
-
-        return "redirect:/admin";
     }
 
     @PostMapping("/admin/add/addProduct")
@@ -121,27 +135,6 @@ public class ProductController {
 
         return "redirect:/admin";
     }
-
-    @GetMapping("/admin/gender")
-    public String genderPage(@RequestParam String gender, Model model) throws SQLException {
-
-        //List the product by Gender
-        List<Products> products = ProductRepository.getProductByGenderList(gender);
-        model.addAttribute("products", products);
-
-        return "adminPage";
-    }
-
-    @GetMapping("/admin/category")
-    public String categoryPage(@RequestParam String category, Model model) throws SQLException {
-
-        //List the product by category
-        List<Products> products = ProductRepository.getProductByCategoryList(category);
-        model.addAttribute("products", products);
-
-        return "adminPage";
-    }
-
 
     @PostMapping("/admin/stock")
     public String stockProductPage(@RequestParam("prod_id") int id, Model model) throws SQLException {
@@ -211,7 +204,6 @@ public class ProductController {
         return "stockProduct";
     }
 
-
     @PostMapping("/admin/stock/update")
     public String updateStock(@RequestParam("stockId") int stockId,
                               @RequestParam("prodId") int prodId,
@@ -232,6 +224,41 @@ public class ProductController {
         System.out.println("Quantity: " +passStockQty);
 
         return "stockProduct";
+    }
+
+    @PostMapping("/admin/back")
+    public String back(){
+
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/home")
+    public String homepage(Model model) throws SQLException {
+        List<Products> products = ProductRepository.getProductList(); // You need to implement this method
+
+        model.addAttribute("products", products);
+
+        return "homepage";
+    }
+
+    @GetMapping("/home/gender")
+    public String homeGenderPage(@RequestParam String gender, Model model) throws SQLException {
+
+        //List the product by Gender
+        List<Products> products = ProductRepository.getProductByGenderList(gender);
+        model.addAttribute("products", products);
+
+        return "homepage";
+    }
+
+    @GetMapping("/home/category")
+    public String homeCategoryPage(@RequestParam String category, Model model) throws SQLException {
+
+        //List the product by Gender
+        List<Products> products = ProductRepository.getProductByCategoryList(category);
+        model.addAttribute("products", products);
+
+        return "homepage";
     }
 
 }
