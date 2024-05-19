@@ -48,6 +48,7 @@ public class SpringSecurity {
                                 .successHandler((request, response, authentication) -> {
                                     // Retrieve authorities of the authenticated user
                                     Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+                                    System.out.println("Authorities: " + authorities);
 
                                     // Check if the user has ADMIN role
                                     boolean isAdmin = authorities.stream()
@@ -55,9 +56,9 @@ public class SpringSecurity {
 
                                     // Redirect based on user's role
                                     if (isAdmin) {
-                                        response.sendRedirect("/adminDashboard"); // Redirect admin to adminDashboard
+                                        response.sendRedirect("/admin"); // Redirect admin to adminDashboard
                                     } else {
-                                        response.sendRedirect("/index"); // Redirect other users to index
+                                        response.sendRedirect("/home"); // Redirect other users to index
                                     }
                                 })
                                 .permitAll() // Allow access to login page
