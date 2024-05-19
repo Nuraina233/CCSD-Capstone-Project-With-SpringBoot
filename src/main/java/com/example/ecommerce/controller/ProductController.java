@@ -24,7 +24,16 @@ public class ProductController {
         model.addAttribute("products", products);
 
         // Return the view name (HTML file)
-        return "adminPage";
+        return "homepage";
+    }
+
+    @GetMapping("/home")
+    public String homepage(Model model) throws SQLException {
+        List<Products> products = ProductRepository.getProductList(); // You need to implement this method
+
+        model.addAttribute("products", products);
+
+        return "homepage";
     }
 
     @PostMapping("/admin/editProduct")
