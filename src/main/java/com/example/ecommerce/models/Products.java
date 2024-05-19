@@ -22,6 +22,14 @@ public class Products {
         this.prodGender = gender;
     }
 
+    public Products(int prodId, String prodName, String prodImage, double prodPrice){
+        this.prodId = prodId;
+        this.prodName = prodName;
+        this.prodImage = prodImage;
+        this.prodPrice = prodPrice;
+    }
+
+
     //getter method
     public int getProdId(){
         return prodId;
