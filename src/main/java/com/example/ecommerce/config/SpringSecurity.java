@@ -39,7 +39,7 @@ public class SpringSecurity {
                                 .requestMatchers("/index").permitAll() // Allow access to index page
                                 .requestMatchers("/cart").permitAll() // Allow access to cart page
 
-                                .requestMatchers("/adminDashboard/**").hasRole("ADMIN") // Require ADMIN role for /adminDashboard endpoint
+                                .requestMatchers("/admin/**").hasRole("ADMIN") // Require ADMIN role for /adminDashboard endpoint
                 )
                 .formLogin(
                         form -> form
