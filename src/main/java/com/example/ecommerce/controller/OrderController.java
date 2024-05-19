@@ -2,11 +2,9 @@ package com.example.ecommerce.controller;//package com.example.ecommerce.control
 
 import com.example.ecommerce.models.Orders;
 import com.example.ecommerce.models.OrdersProduct;
-import com.example.ecommerce.repository.DisplayOrders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,16 +12,16 @@ import java.util.List;
 @Controller
 public class OrderController {
 
-    @GetMapping("/cart")
-    public String showCart(Model model) throws SQLException {
-        // Retrieve the current order or cart
-        List<OrdersProduct> currentOrder = DisplayOrders.getOrdersList(); // You need to implement this method
-
-        System.out.println(currentOrder);
-        model.addAttribute("orders", currentOrder);
-
-        return "cart";
-    }
+//    @GetMapping("/cart")
+//    public String showCart(Model model) throws SQLException {
+//        Retrieve the current order or cart
+////        List<OrdersProduct> currentOrder = DisplayOrders.getOrdersList(); // You need to implement this method
+//
+//        System.out.println(currentOrder);
+//        model.addAttribute("orders", currentOrder);
+//
+//        return "cart";
+//    }
 
     @PostMapping("/cart/addProduct")
     public String addProductToOrder(@RequestParam("orderId") int orderId,
