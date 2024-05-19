@@ -1,4 +1,4 @@
-package com.example.ecommerce.controller;
+/*package com.example.ecommerce.controller;
 
 import com.example.ecommerce.models.OrdersProduct;
 import com.example.ecommerce.repository.OrderRepository;
@@ -27,4 +27,4 @@ public class OrderProductsController {
 
         return "orderSummary"; // This returns the orderSummary.html view
     }
-}
+}*/
