@@ -1,6 +1,5 @@
 package com.example.ecommerce.controller;
 
-import com.example.ecommerce.models.Orders;
 import com.example.ecommerce.models.OrdersProduct;
 import com.example.ecommerce.repository.OrderRepository;
 import org.springframework.stereotype.Controller;
@@ -11,13 +10,18 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cart")
 public class OrderController {
 
-    @GetMapping
+    @GetMapping("/cart")
     public String showCart(Model model) throws SQLException {
-        List<OrdersProduct> currentOrder = OrderRepository.getOrderProductList(1); // Placeholder order ID
-        double totalSubtotal = calculateTotalSubtotal(currentOrder);
+        // Retrieve the current order or cart
+        List<OrdersProduct> currentOrder = OrderRepository.getOrderProductList(1);
+
+        // Calculate total subtotal
+        double totalSubtotal = 0;
+        for (OrdersProduct ordersProduct : currentOrder) {
+            totalSubtotal += ordersProduct.getSubtotal();
+        }
 
         model.addAttribute("orderproducts", currentOrder);
         model.addAttribute("totalSubtotal", totalSubtotal);
@@ -25,37 +29,21 @@ public class OrderController {
         return "cart";
     }
 
-    @PostMapping("/addProduct")
-    public String addProductToOrder(@RequestParam("orderId") int orderId,
-                                    @RequestParam("prodId") int prodId,
-                                    @RequestParam("quantity") int quantity) throws SQLException {
-        OrderRepository.insertOrder(orderId, prodId, quantity, 1); // Assuming a paymentId of 1, change as needed
-        return "redirect:/cart";
-    }
-
-    @PostMapping("/updateQuantity")
+    @PostMapping("/cart/updateQuantity")
     public String updateQuantity(@RequestParam("orderId") int orderId,
                                  @RequestParam("prodId") int prodId,
                                  @RequestParam("quantity") int quantity) throws SQLException {
+        // Update the quantity in the database using OrderRepository
         OrderRepository.updateProductQuantity(orderId, prodId, quantity);
-        return "redirect:/cart";
+
+        return "redirect:/cart"; // Redirect back to the cart page
     }
 
-    @PostMapping("/removeProduct")
-    public String removeProduct(@RequestParam("orderproductId") int orderproductId,
-                                Model model) throws SQLException {
+    @PostMapping("/cart/removeProduct")
+    public String removeProduct(@RequestParam("orderproductId") int orderproductId) throws SQLException {
+        // Remove the product item
         OrderRepository.removeOrderProduct(orderproductId);
 
-        List<OrdersProduct> currentOrder = OrderRepository.getOrderProductList(1); // Placeholder order ID
-        double totalSubtotal = calculateTotalSubtotal(currentOrder);
-
-        model.addAttribute("orderproducts", currentOrder);
-        model.addAttribute("totalSubtotal", totalSubtotal);
-
         return "redirect:/cart";
-    }
-
-    private double calculateTotalSubtotal(List<OrdersProduct> orderProducts) {
-        return orderProducts.stream().mapToDouble(OrdersProduct::getSubtotal).sum();
     }
 }

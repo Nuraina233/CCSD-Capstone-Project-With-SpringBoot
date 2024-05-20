@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <!-- CSS -->
+    <meta name="robots" content="noindex,follow" />
+</head>
+
+<style>
+    /* Basic Styling */
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Columns */
+    .left-column {
+      width: 100%;
+      text-align: center;
+    }
+
+    .right-column {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    /* Left Column */
+    .left-column img {
+      width: 100%;
+      height: auto;
+      max-width: 600px;
+      transition: all 0.3s ease;
+    }
+
+    /* Right Column */
+
+    /* Product Description */
+    .product-description {
+      border-bottom: 1px solid #E1E8EE;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .product-description span {
+      font-size: 12px;
+      color: #358ED7;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .product-description h1 {
+      font-weight: 300;
+      font-size: 32px;
+      color: #43484D;
+      letter-spacing: -1px;
+    }
+    .product-description p {
+      font-size: 16px;
+      font-weight: 300;
+      color: #86939E;
+      line-height: 24px;
+    }
+
+    /* Product Price and Cart Button */
+    .product-price-container {
+      display: flex;
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center items horizontally */
+    }
+
+    .product-price-container span {
+      font-size: 26px;
+      font-weight: 300;
+      color: #43474D;
+      margin-bottom: 20px; /* Add some space between price and button */
+    }
+
+    .cart-btn {
+      display: inline-block;
+      background-color: #7DC855;
+      border-radius: 6px;
+      font-size: 16px;
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 12px 30px;
+      transition: all .5s;
+    }
+
+    .cart-btn:hover {
+      background-color: #64af3d;
+    }
+
+    /* Responsive */
+    @media (max-width: 940px) {
+      .container {
+        margin-top: 60px;
+      }
+
+      .left-column img {
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 535px) {
+      .left-column img {
+        max-width: 220px;
+      }
+    }
+</style>
+
+<body>
+<main class="container">
+
+    <!-- Left Column / Headphones Image -->
+    <div class="left-column" th:each="product : ${singleProducts}">
+        <img th:src="'/images/'+@{${product.getProduct_image()}}">
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column" th:each="product : ${singleProducts}">
+
+        <!-- Product Description -->
+        <div class="product-description">
+            <h1 th:text="${product.product_name}">Product Name</h1>
+            <p th:text="${product.description}">Product Description</p>
+        </div>
+
+        <!-- Product Pricing -->
+        <div class="product-price-container">
+            <span th:text="'RM' + ${product.price}">Product Price</span>
+            <a href="#" class="cart-btn">Add to cart</a>
+        </div>
+    </div>
+</main>
+
+<!-- Scripts -->
+<script charset="utf-8"></script>
+<script charset="utf-8">
+    <!--    $(document).ready(function() {-->
+
+    <!--  ('.color-choose input').on('click', function() {-->
+    <!--      var headphonesColor = $(this).attr('data-image');-->
+
+    <!--      $('.active').removeClass('active');-->
+    <!--      $('.left-column img[data-image = ' + headphonesColor + ']').addClass('active');-->
+    <!--      $(this).addClass('active');-->
+    <!--  });-->
+
+    <!--});-->
+</script>
+</body>
+</html>
