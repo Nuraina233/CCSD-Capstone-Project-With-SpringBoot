@@ -82,5 +82,4 @@ public class OrdersProduct {
     public void setPaymentID(int paymentID) {
         this.paymentID = paymentID;
     }
-
 }
