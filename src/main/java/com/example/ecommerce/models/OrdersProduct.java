@@ -1,5 +1,11 @@
 package com.example.ecommerce.models;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class OrdersProduct {
     private int orderproductId;
     private int orderId;
