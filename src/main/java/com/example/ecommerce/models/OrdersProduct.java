@@ -35,4 +35,52 @@ public class OrdersProduct {
         this.total = total;
     }
 
+    public int getOrderproductId() {
+        return orderproductId;
+    }
+
+    public void setOrderproductId(int orderproductId) {
+        this.orderproductId = orderproductId;
+    }
+
+    public Products getProducts() {
+        return products;
+    }
+
+    public void setProducts(Products products) {
+        this.products = products;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getProdQuantity() {
+        return prodQuantity;
+    }
+
+    public void setProdQuantity(int prodQuantity) {
+        this.prodQuantity = prodQuantity;
+    }
+
+    public double getSubtotal(){
+        return products.getProdPrice() * prodQuantity;
+    }
+
+    public int getProdID() {
+        return prodID;
+    }
+
+    public int getPaymentID() {
+        return paymentID;
+    }
+
+    public void setPaymentID(int paymentID) {
+        this.paymentID = paymentID;
+    }
+
 }
