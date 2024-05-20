@@ -16,9 +16,14 @@ public class OrderSummaryController {
     private OrderSummaryService orderSummaryService;
 
     @GetMapping("/orderSummary")
-    public String showOrderSummary(Model model) {
+    public String getOrderSummaries(Model model) {
         List<OrderSummary> orderSummaries = orderSummaryService.getOrderSummaries();
-        model.addAttribute("orderSummaries", orderSummaries);
+        model.addAttribute("orderSummary", orderSummaries);
         return "orderSummary";
+    }
+
+    @GetMapping("/payments")
+    public String redirectToPayments() {
+        return "payments"; // This renders the payments.html
     }
 }

@@ -160,6 +160,8 @@
         var selectedPaymentMethod = document.getElementById('payment-method').value;
         var errorMessage = document.getElementById('error-message');
 
+        console.log('Selected Payment Method:', selectedPaymentMethod);
+
         if (selectedPaymentMethod === 'credit-card') {
             var cardNumber = document.getElementById('card-number').value;
             var expiryDate = document.getElementById('expiry-date').value;
@@ -172,7 +174,7 @@
             }
         }
 
-        var receiptUrl = 'receipt.html';
+        var receiptUrl = '/receipt';
         if (selectedPaymentMethod === 'credit-card') {
             receiptUrl += '?method=credit-card';
         } else if (selectedPaymentMethod === 'cash-on-delivery') {
@@ -182,6 +184,7 @@
             receiptUrl += '?method=bank-transfer&bank=' + encodeURIComponent(bankSelection);
         }
 
+        console.log('Redirecting to:', receiptUrl);
         window.location.href = receiptUrl; // Redirect to receipt page
     });
 </script>
