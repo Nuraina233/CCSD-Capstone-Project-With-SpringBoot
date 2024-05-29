@@ -2,6 +2,7 @@
 <html lang="zxx" class="no-js" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
+    <title>Ecom Wizards</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -467,7 +468,7 @@
 
         /* Alert Styling */
         .alert {
-            margin-top: 20px;
+            text-align: center;
         }
 
         /* Additional Navbar Styling for Minishop */
@@ -621,9 +622,9 @@
                         <li class="nav-item dropdown active" th:if="${#authorization.expression('isAuthenticated()')}">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown06">
+                                <a class="dropdown-item" th:href="@{/viewCart}" >Cart 🛒</a>
                                 <a class="dropdown-item" th:href="@{/customer/edit}" >edit profile</a>
                                 <a class="dropdown-item" th:href="@{/logout}" >Logout</a>
-
                             </div>
                         </li>
                     </ul>
@@ -634,15 +635,25 @@
     </div>
 </header>
 <!-- End Header Area -->
+<div th:if="${param.back}">
+    <div class="alert alert-info">
+        Looks like your cart is feeling a bit lonely! Ready to give it some company? Start adding products now!
+    </div>
+</div>
+
 <section class="product_list_area section_gap">
+
     <div class="container">
         <div th:each="product : ${products}" class="product">
-            <img th:src="'https://github.com/Nuraina233/CCSD-Capstone-Project-With-SpringBoot/blob/CCSD-Capstone-Project-With-SpringBoot/src/main/resources/images/' +@{${product.getProdImage()} +'?raw=true'}">
+            <img th:src="'/images/'+${product.getProdImage()}">
             <h2 th:text="${product.getProdName()}"></h2>
             <p th:text="${product.getProdColor()}"></p>
             <p th:text="${product.getProdGender()} +' / ' +${product.getProdCategory()}"></p>
             <p2 th:text="'RM' +${product.getProdPrice()}"></p2><br>
-            <button class="btn btn-success">Shop</button>
+            <form th:action="@{/singlePage/{product_id}(product_id=${product.prodId})}" method="get">
+<!--                <input type="hidden" name="prod_name" th:value="${product.getProdName()}">-->
+                <button class="btn btn-success">Shop</button>
+            </form>
         </div>
     </div>
 </section>

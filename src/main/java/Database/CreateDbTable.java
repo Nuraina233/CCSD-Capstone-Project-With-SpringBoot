@@ -12,17 +12,13 @@ import java.sql.Statement;
 import dbconfig.DBConfig;
 
 public class CreateDbTable {
-    public static void main(String[] args) throws SQLException {
-        //Database name (replace as needed)
+
+    public static void createTable() throws SQLException {
+        //Database name
         String dbName = "ecommerce";
 
         //Table name and column (replace as needed)
         String tableName = "new_table";
-        String createTableSQL = "CREATE TABLE IF NOT EXISTS " +tableName +" (" +
-                "id INT PRIMARY KEY AUTO_INCREMENT," +
-                "name VARCHAR(50) NOT NULL," +
-                "age INT NOT NULL" +
-                ")";
 
         Connection connection = null;
         Statement statement = null;
@@ -50,7 +46,11 @@ public class CreateDbTable {
                 System.out.println("Database '" +dbName +"' already exists.");
             }
 
-            //Create the table
+            //Create the table role
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS roles (" +
+                    "id INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +
+                    "name VARCHAR(15) NOT NULL" +
+                    ")";
             statement.execute(createTableSQL);
             System.out.println("Table '" +tableName +"' has been created");
 

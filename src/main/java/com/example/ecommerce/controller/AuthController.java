@@ -31,6 +31,9 @@ public class AuthController {
     // Handler method to handle login request
     @GetMapping("/login")
     public String login(){
+
+        OrderController.productsList.clear();
+
         return "login"; // Return the view name for the login page
     }
 
@@ -65,7 +68,7 @@ public class AuthController {
 
         // Save the user if there are no errors and redirect to the registration page with success message
         userService.saveUser(userDto);
-        return "redirect:/register?success";
+        return "redirect:/login?success";
     }
 
     // Handler method to handle list of users

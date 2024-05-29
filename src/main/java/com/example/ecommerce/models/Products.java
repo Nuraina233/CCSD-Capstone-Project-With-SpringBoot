@@ -9,6 +9,10 @@ public class Products {
     private String prodColor;
     private String prodCategory;
     private String prodGender;
+    private int prodQty;
+    private double prodTotal;
+    private String prodSize;
+    private int prodStock;
 
     //constructor
     public Products(int id, String name, String image, double price, String desc, String color, String category, String gender){
@@ -22,11 +26,20 @@ public class Products {
         this.prodGender = gender;
     }
 
-    public Products(int prodId, String prodName, String prodImage, double prodPrice){
+    public Products(int prodId, String prodName, String prodImage, double prodPrice, int prodQty, double prodTotal, String prodSize, int prodStock){
         this.prodId = prodId;
         this.prodName = prodName;
         this.prodImage = prodImage;
         this.prodPrice = prodPrice;
+        this.prodQty = prodQty;
+        this.prodTotal = prodTotal;
+        this.prodSize = prodSize;
+        this.prodStock = prodStock;
+    }
+
+    public Products(int prodId, String prodColor){
+        this.prodId = prodId;
+        this.prodColor = prodColor;
     }
 
 
@@ -61,5 +74,37 @@ public class Products {
 
     public String getProdGender() {
         return prodGender;
+    }
+
+    public int getProdQty() {
+        return prodQty;
+    }
+
+    public double getProdTotal() {
+        return prodTotal;
+    }
+
+    public String getProdSize() {
+        return prodSize;
+    }
+
+    public int getProdStock() {
+        return prodStock;
+    }
+
+    public void setProdTotal(int qty) {
+        this.prodTotal =  qty * prodPrice;
+    }
+
+    public void setProdQty(int prodQty) {
+        this.prodQty = prodQty;
+    }
+
+    public void setProdSize(String prodSize) {
+        this.prodSize = prodSize;
+    }
+
+    public void setProdStock(int prodStock) {
+        this.prodStock = prodStock;
     }
 }

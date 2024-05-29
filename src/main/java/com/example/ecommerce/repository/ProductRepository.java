@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.ecommerce.models.OrdersProduct;
 import com.example.ecommerce.models.Stocks;
 import dbconfig.DBConfig;
 import com.example.ecommerce.models.Products;
@@ -32,7 +33,9 @@ public class ProductRepository {
 
         //getProductByGenderList("Women");
 
-        getProductByCategoryList("Running Shoes");
+        //getProductByCategoryList("Running Shoes");
+
+        getProductByColorList("Adizero Takumi Sen10 Shoes");
     }
 
     //all products
@@ -140,7 +143,6 @@ public class ProductRepository {
             while (resultSet.next()) {
                 int id = passId;
                 String name = resultSet.getString(nameColumn);
-
                 String image = resultSet.getString(imageColumn);
                 double price = resultSet.getDouble(priceColumn);
                 String desc = resultSet.getString(descColumn);
@@ -271,6 +273,49 @@ public class ProductRepository {
         return productsList;
     }
 
+    public static List<Products> getProductByColorList(String passName) throws SQLException {
+        productsList.clear();
+        try {
+            //connect to database
+            connection = DriverManager.getConnection(jdbcUrl, username, password);
+
+            //create a statement
+            String sql = "SELECT product_id, product_name, color FROM " + tableName + " WHERE product_name = ?";
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Set the parameter value for the product_id placeholder
+            preparedStatement.setString(1, passName);
+
+            //execute the query to retrieve data
+            resultSet = preparedStatement.executeQuery();
+
+            //print data
+            while (resultSet.next()) {
+                int id = resultSet.getInt(idColumn);
+                String color = resultSet.getString(colorColumn);
+                Products products = new Products(id, color);
+                productsList.add(products);
+            }
+
+            System.out.println("Retrieve Product by product gender " +passName);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return productsList;
+    }
+
     //update product by id
     public static void getUpdateProduct(int passId, String nameToUpdate, String imageToUpdate,
                                         double priceToUpdate, String descToUpdate, String colorToUpdate,
@@ -380,15 +425,20 @@ public class ProductRepository {
             //connect to database
             connection = DriverManager.getConnection(jdbcUrl, username, password);
 
-            //create a statement
-            String sql = "DELETE FROM " + tableName + " WHERE " + idColumn + " = ?";
-            preparedStatement = connection.prepareStatement(sql);
+            // First SQL statement: Delete from tableName where idColumn = passId
+            String deleteSql = "DELETE FROM stocks WHERE product_id = ?";
+            PreparedStatement deleteStock = connection.prepareStatement(deleteSql);
+            deleteStock.setInt(1, passId);
+            int rowsDeleted = deleteStock.executeUpdate();
+            System.out.println("Rows stock deleted: " + rowsDeleted);
 
-            // Set the parameter value for the product_id placeholder
-            preparedStatement.setInt(1, passId);
-
-            // Execute the DELETE statement
-            int rowsAffected = preparedStatement.executeUpdate();
+            // Second SQL statement: Your second SQL statement
+            String secondSql = "DELETE FROM products WHERE product_id = ?";
+            PreparedStatement deleteProduct = connection.prepareStatement(secondSql);
+            // Set parameters if needed
+            deleteProduct.setInt(1, passId);
+            int rowsAffected = deleteProduct.executeUpdate();
+            System.out.println("Rows products affected: " + rowsAffected);
 
             // Check if any rows were deleted
             if (rowsAffected > 0) {
@@ -585,4 +635,57 @@ public class ProductRepository {
             }
         }
     }
+
+//    //insert product into database
+//    public static void addToCart(int cust_id, String name, String color, String
+//                                        double priceToInsert, String descToInsert, String colorToInsert,
+//                                        String catToInsert, String genderToInsert) throws SQLException {
+//        try {
+//            //connect to database
+//            connection = DriverManager.getConnection(jdbcUrl, username, password);
+//
+//            //create a statement
+//            String sql = "INSERT INTO " + tableName + " (" +
+//                    idColumn + "," +nameColumn + "," + imageColumn + "," + priceColumn + "," +
+//                    descColumn + "," + colorColumn + "," + categoryColumn + "," + genderColumn+
+//                    ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+//            preparedStatement = connection.prepareStatement(sql);
+//
+//            // Set the parameter value for all columns' placeholder
+//            preparedStatement.setString(1, null);
+//            preparedStatement.setString(2, nameToInsert);
+//            preparedStatement.setString(3, imageToInsert);
+//            preparedStatement.setDouble(4, priceToInsert);
+//            preparedStatement.setString(5, descToInsert);
+//            preparedStatement.setString(6, colorToInsert);
+//            preparedStatement.setString(7, catToInsert);
+//            preparedStatement.setString(8, genderToInsert);
+//
+//            // Execute the INSERT statement
+//            int rowsAffected = preparedStatement.executeUpdate();
+//
+//            // Check if any rows were inserted
+//            if (rowsAffected > 0) {
+//                System.out.println("Record inserted successfully!");
+//            } else {
+//                System.out.println("No records inserted!");
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            // Close resources
+//            if (resultSet != null) {
+//                resultSet.close();
+//            }
+//            if (preparedStatement != null) {
+//                preparedStatement.close();
+//            }
+//            if (connection != null) {
+//                connection.close();
+//            }
+//
+//        }
+//    }
+
 }

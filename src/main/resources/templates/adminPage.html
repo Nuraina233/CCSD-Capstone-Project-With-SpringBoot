@@ -551,10 +551,10 @@
 </head>
 
 <body>
-
 <!-- Start Header Area -->
 <header class="header_area sticky-header">
     <div class="main_menu">
+        <!-- START nav -->
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" th:href="@{/admin}">Ecom Wizards</a>
@@ -626,7 +626,7 @@
                                 <tr>
                                     <td th:text="${product.getProdId()}"></td>
                                     <td th:text="${product.getProdName()}"></td>
-                                    <td><img th:src="'https://github.com/Nuraina233/CCSD-Capstone-Project-With-SpringBoot/blob/CCSD-Capstone-Project-With-SpringBoot/src/main/resources/images/' +@{${product.getProdImage()} +'?raw=true'}" style="width: 100%; height: auto;"></td>
+                                    <td><img th:src="'/images/'+${product.getProdImage()}" style="width: 250px; height: auto;"></td>
                                     <td th:text="${product.getProdPrice()}"></td>
                                     <td th:text="${product.getProdColor()}"></td>
                                     <td th:text="${product.getProdCategory()}"></td>

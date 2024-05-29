@@ -26,6 +26,7 @@ public class CustomerController {
         String currentEmail = authentication.getName();
         Customer customer = customerService.getCustomerByEmail(currentEmail);
         System.out.println(currentEmail);
+        System.out.println(customer.getCustomer_id());
         model.addAttribute("customer", customer);
         return "edit_customerb";
     }

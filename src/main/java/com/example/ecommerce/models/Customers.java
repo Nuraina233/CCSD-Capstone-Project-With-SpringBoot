@@ -16,8 +16,7 @@ public class Customers {
         this.email = email;
         this.address = address;
         this.phone = phone;
-        this.password = password;
-    }
+        this.password = password;    }
 
     public int getCustomer_id() {
         return customer_id;

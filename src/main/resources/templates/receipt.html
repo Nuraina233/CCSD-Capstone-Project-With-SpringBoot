@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,89 +7,95 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            font-family: 'Red Hat Display', Arial, sans-serif;
-            background-color: hsl(225, 100%, 94%);
-            color: #333; /* Text color */
-            margin: 0;
-            padding: 0;
-        }
+     font-family: Arial, sans-serif;
+     background-color: #f8f9fa;
+     color: #333; /* Text color */
+     margin: 0;
+     padding: 0;
+ }
 
-        .container {
-            background-color: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 600px; /* Limit container width for better readability */
-            margin: 50px auto; /* Center container horizontally and add margin to top and bottom */
-        }
+ .container {
+     background-color: #fff;
+     border-radius: 10px;
+     padding: 20px;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     max-width: 600px; /* Limit container width for better readability */
+     margin: auto; /* Center container horizontally */
+ }
 
-        h2 {
-            color: hsl(223, 47%, 23%);
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            text-align: center;
-        }
+ h2 {
+     color: #333;
+     font-size: 28px;
+     font-weight: bold;
+     margin-bottom: 30px;
+     text-align: center;
+ }
 
-        #receipt-details {
-            border: 2px solid #28a745; /* Green border */
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            background-color: #f8f9fa; /* Light gray background */
-            animation: fadeIn 1s ease-in-out;
-        }
+ #receipt-details {
+     border: 2px solid #28a745; /* Green border */
+     border-radius: 10px;
+     padding: 20px;
+     margin-bottom: 30px;
+     background-color: #f8f9fa; /* Light gray background */
+ }
 
-        #receipt-details h3 {
-            color: #28a745; /* Green heading */
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+ #receipt-details h3 {
+     color: #28a745; /* Green heading */
+     font-size: 24px;
+     font-weight: bold;
+     margin-bottom: 5px;
+     text-align: center;
+ }
 
-        #receipt-details p {
-            margin: 0;
-            color: #333;
-            font-size: 18px;
-            line-height: 1.5;
-            text-align: left; /* Align text to the left */
-        }
+ #receipt-details h4 {
+     color: #333;
+     font-size: 18px;
+     font-weight: bold;
+     margin-bottom: 5px;
+     text-align: center;
+ }
 
-        .receipt-time-date {
-            font-size: 14px;
-            color: #666;
-            text-align: right;
-            margin-top: 10px;
-        }
+ #receipt-details p {
+     margin: 0;
+     color: #333;
+     font-size: 18px;
+     line-height: 1.5;
+     text-align: left; /* Align text to the left */
+ }
 
-        .text-center {
-            text-align: center; /* Align center for buttons */
-        }
+ .receipt-time-date {
+     font-size: 14px;
+     color: #666;
+     text-align: right;
+ }
 
-        .btn-success, .btn-primary {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 20px;
-            cursor: pointer;
-            margin-right: 10px; /* Add some margin between buttons */
-            transition: background-color 0.3s ease;
-        }
+ .text-center {
+     text-align: center; /* Align center for buttons */
+ }
 
-        .btn-primary {
-            background-color: #007bff;
-        }
+ .btn-success {
+     background-color: #28a745;
+     color: #fff;
+     border: none;
+     border-radius: 4px;
+     padding: 10px 20px;
+     cursor: pointer;
+     margin-right: 10px; /* Add some margin between buttons */
+ }
 
-        .btn-success:hover, .btn-primary:hover {
-            opacity: 0.8;
-        }
+ .btn-primary {
+     background-color: #007bff;
+     color: #fff;
+     border: none;
+     border-radius: 4px;
+     padding: 10px 20px;
+     cursor: pointer;
+ }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+ .btn-success:hover, .btn-primary:hover {
+     opacity: 0.8;
+ }
+
     </style>
 </head>
 <body>
@@ -98,16 +104,18 @@
     <div id="receipt-details" class="mb-3">
         <!-- Receipt details -->
         <h3>Receipt Details</h3>
-        <p id="total-price">Total Price: RM 1278.00</p>
+        <h4>Order invoice:</h4>
+        <h4 th:text="${invoice}" style="margin-bottom:20px;"></h4>
+        <p th:text="'Total Price: RM' +${price}"></p>
         <p>Payment Status: Paid</p>
-        <p>Payment Method: Credit Card</p> <!-- Add payment method here -->
+        <p th:text="'Payment Method: ' +${payment}"></p> <!-- Add payment method here -->
     </div>
     <div class="receipt-time-date">
         <span id="current-date-time"></span>
     </div>
     <div class="text-center mt-4">
         <button onclick="window.print()" class="btn btn-success">Print Receipt</button>
-        <button onclick="window.location.href = 'homepage.html'" class="btn btn-primary ml-3">Home</button>
+        <button onclick="window.location.href = 'home'" class="btn btn-primary ml-3">Home</button>
     </div>
 </div>
 <!-- Include your JavaScript file here -->
@@ -123,17 +131,6 @@
         hour12: true
     });
     document.getElementById('current-date-time').innerText = currentDateTime;
-
-    // Fetch total price from ordersummary.html
-    fetch('ordersummary.html')
-        .then(response => response.text())
-        .then(data => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data, 'text/html');
-            const totalPrice = doc.querySelector('.text-right strong').textContent;
-            document.getElementById('total-price').textContent += totalPrice.split('RM ')[1];
-        })
-        .catch(error => console.error('Error fetching order summary:', error));
 </script>
 </body>
 </html>

@@ -16,6 +16,7 @@ import java.util.List;
 @Controller
 public class ProductController {
 
+    //admin homepage
     @GetMapping("/admin")
     public String adminPage(Model model) throws SQLException {
         List<Products> products = ProductRepository.getProductList();
@@ -27,6 +28,7 @@ public class ProductController {
         return "adminPage";
     }
 
+    //filter products based on gender
     @GetMapping("/admin/gender")
     public String genderPage(@RequestParam String gender, Model model) throws SQLException {
 
@@ -37,6 +39,7 @@ public class ProductController {
         return "adminPage";
     }
 
+    //filter products based on category
     @GetMapping("/admin/category")
     public String categoryPage(@RequestParam String category, Model model) throws SQLException {
 
@@ -47,6 +50,7 @@ public class ProductController {
         return "adminPage";
     }
 
+    //redirect to edit product page
     @PostMapping("/admin/editProduct")
     public String editProductPage(@RequestParam("prod_id") int id, Model model) throws SQLException {
 
@@ -71,6 +75,7 @@ public class ProductController {
         return "editProduct";
     }
 
+    //update product process and redirect to admin homepage
     @PostMapping("/admin/editProduct/updateProduct")
     public String updateProduct(@RequestParam("passId") String passId,
                                 @RequestParam("passName") String passName,
@@ -85,13 +90,27 @@ public class ProductController {
         ProductRepository dp = new ProductRepository();
         dp.getUpdateProduct(Integer.parseInt(passId),passName,passImage,Double.parseDouble(passPrice),passDesc,passColor,passCategory,passGender);
 
-        // Add the list of products to the model
-        List<Products> products = ProductRepository.getProductList();
-        model.addAttribute("products", products);
+        List<String> categories = new ArrayList<>();
+        categories.clear();
+        categories.add("Running Shoes");
+        categories.add("Sneakers");
+        categories.add("Outdoor");
 
-        return "redirect:/admin";
+        List<String> genders = new ArrayList<>();
+        genders.clear();
+        genders.add("Men");
+        genders.add("Women");
+
+        //get the list of product that want to edit
+        Products products = ProductRepository.getProductById(Integer.parseInt(passId));
+        model.addAttribute("products", products);
+        model.addAttribute("genders", genders);
+        model.addAttribute("categories", categories);
+
+        return "editProduct";
     }
 
+    //delete product process and redirect to admin homepage
     @PostMapping("/admin/deleteProduct")
     public String deleteProduct(@RequestParam("prod_id") int id, Model model) throws SQLException {
 
@@ -106,6 +125,7 @@ public class ProductController {
         return "redirect:/admin";
     }
 
+    // redirect to add new product page
     @PostMapping("/admin/add")
     public String addProductPage(Model model) throws SQLException {
 
@@ -116,6 +136,7 @@ public class ProductController {
         return "addProduct";
     }
 
+    //add new product into database and redirect to admin homepage
     @PostMapping("/admin/add/addProduct")
     public String addProduct(@RequestParam("passName") String passName,
                              @RequestParam("passImage") String passImage,
@@ -136,6 +157,7 @@ public class ProductController {
         return "redirect:/admin";
     }
 
+    //redirect to add stock page
     @PostMapping("/admin/stock")
     public String stockProductPage(@RequestParam("prod_id") int id, Model model) throws SQLException {
 
@@ -150,6 +172,7 @@ public class ProductController {
         return "stockProduct";
     }
 
+    //remove the size of shoes from the stock table in database and back to stock to display new list of stock
     @PostMapping("/admin/stock/remove")
     public String removeStock(@RequestParam("stockId") int stockId,
                               @RequestParam("prodId") int prodId,
@@ -169,6 +192,7 @@ public class ProductController {
         return "stockProduct";
     }
 
+    //go to add size for stock page
     @PostMapping("/admin/stock/addButton")
     public String addStockButton(@RequestParam("passProdId") int id,
                                  Model model) throws SQLException {
@@ -184,6 +208,7 @@ public class ProductController {
         return "addStock";
     }
 
+    // add new size with quantities in database
     @PostMapping("/admin/stock/addStock")
     public String addStock(@RequestParam("prodId") int prodId,
                            @RequestParam("passSize") double passSize,
@@ -204,6 +229,7 @@ public class ProductController {
         return "stockProduct";
     }
 
+    // update the quantities of shoes based on their sizes
     @PostMapping("/admin/stock/update")
     public String updateStock(@RequestParam("stockId") int stockId,
                               @RequestParam("prodId") int prodId,
@@ -226,39 +252,10 @@ public class ProductController {
         return "stockProduct";
     }
 
+    // back to admin page process
     @PostMapping("/admin/back")
     public String back(){
 
         return "redirect:/admin";
     }
-
-    @GetMapping("/home")
-    public String homepage(Model model) throws SQLException {
-        List<Products> products = ProductRepository.getProductList(); // You need to implement this method
-
-        model.addAttribute("products", products);
-
-        return "homepage";
-    }
-
-    @GetMapping("/home/gender")
-    public String homeGenderPage(@RequestParam String gender, Model model) throws SQLException {
-
-        //List the product by Gender
-        List<Products> products = ProductRepository.getProductByGenderList(gender);
-        model.addAttribute("products", products);
-
-        return "homepage";
-    }
-
-    @GetMapping("/home/category")
-    public String homeCategoryPage(@RequestParam String category, Model model) throws SQLException {
-
-        //List the product by Gender
-        List<Products> products = ProductRepository.getProductByCategoryList(category);
-        model.addAttribute("products", products);
-
-        return "homepage";
-    }
-
 }

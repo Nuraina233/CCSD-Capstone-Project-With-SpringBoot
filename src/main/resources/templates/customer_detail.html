@@ -71,7 +71,6 @@
 <div class="container-xl px-4 mt-4">
     <nav class="nav nav-borders">
         <a class="nav-link active ms-0" href="#">Profile</a>
-
     </nav>
     <hr class="mt-0 mb-4">
     <div class="row">
@@ -87,7 +86,7 @@
         </div>
         <div class="col-xl-8">
             <div class="card mb-4">
-                <div class="card-header">Account Details</div>
+                <div class="card-header">Customer Details</div>
                 <div class="card-body">
                     <form th:action="@{/customer/update}" th:object="${customer}" method="POST">
                         <div class="row gx-3 mb-3">
@@ -115,8 +114,7 @@
                             <input class="form-control" id="phone" type="tel" th:field="*{phone}" placeholder="Enter phone number">
                         </div>
                         <input type="hidden" th:field="*{customer_id}" /> <!-- Include hidden field for customer ID -->
-                        <button class="btn btn-primary" type="submit">Save changes</button> <!-- Use button type="submit" to submit form -->
-                        <a class="btn btn-secondary" th:href="@{/customer/edit}">Cancel</a>
+                        <a class="btn btn-primary" th:href="@{/home}">Back to home</a>
                     </form>
                 </div>
             </div>

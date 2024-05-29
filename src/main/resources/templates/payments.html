@@ -1,102 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Custom CSS styles to match ordersummary.html */
         body {
-            font-family: 'Red Hat Display', Arial, sans-serif;
-            background-color: hsl(225, 100%, 94%);
-            color: #333; /* Text color */
-            margin: 0;
-            padding: 0;
+            background-color: #f8f9fa;
         }
-
         .container {
-            background-color: white;
-            border-radius: 20px;
-            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 600px; /* Limit container width for better readability */
-            margin: 50px auto; /* Center container horizontally and add margin to top and bottom */
         }
-
         h2 {
-            color: hsl(223, 47%, 23%);
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            text-align: center;
+            color: #343a40;
         }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
         label {
             color: #495057;
-            font-weight: bold;
         }
-
         input[type="text"],
         input[type="email"],
         input[type="number"],
         select {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin: 5px 0;
             border: 1px solid #ced4da;
             border-radius: 4px;
             box-sizing: border-box;
         }
-
         button[type="submit"] {
-            width: 100%;
             background-color: #007bff;
             color: #fff;
-            padding: 12px;
+            padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
-
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
-
-        .text-danger {
-            color: #dc3545;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
         .bank-options {
             display: none;
         }
-
-        /* Styling for error message */
-        .error-message {
-            color: #dc3545;
-            font-size: 14px;
-            margin-top: 5px;
-            text-align: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
     </style>
 </head>
 <body>
 <div class="container mt-5">
     <h2>Payment Form</h2>
-    <form id="payment-form">
+    <form th:action="@{/receipt}" method="post">
         <div class="form-group">
             <label for="payment-method">Payment Method</label>
             <select id="payment-method" name="payment-method">
@@ -124,7 +79,6 @@
             <label for="cvv">CVV</label>
             <input type="text" id="cvv" name="cvv" placeholder="Enter CVV">
         </div>
-        <div class="error-message" id="error-message" style="display: none;"></div>
         <button type="submit" class="btn btn-success">Submit Payment</button>
     </form>
 </div>
@@ -138,9 +92,6 @@
         var selectedPaymentMethod = this.value;
         var cardDetails = document.getElementById('card-details');
         var bankOptions = document.getElementById('bank-options');
-        var errorMessage = document.getElementById('error-message');
-
-        errorMessage.style.display = 'none'; // Hide error message on payment method change
 
         if (selectedPaymentMethod === 'credit-card') {
             cardDetails.style.display = 'block';
@@ -152,40 +103,6 @@
             cardDetails.style.display = 'none';
             bankOptions.style.display = 'none';
         }
-    });
-
-    document.getElementById('payment-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
-
-        var selectedPaymentMethod = document.getElementById('payment-method').value;
-        var errorMessage = document.getElementById('error-message');
-
-        console.log('Selected Payment Method:', selectedPaymentMethod);
-
-        if (selectedPaymentMethod === 'credit-card') {
-            var cardNumber = document.getElementById('card-number').value;
-            var expiryDate = document.getElementById('expiry-date').value;
-            var cvv = document.getElementById('cvv').value;
-
-            if (!cardNumber || !expiryDate || !cvv) {
-                errorMessage.textContent = 'Please fill in all card details.';
-                errorMessage.style.display = 'block';
-                return; // Stop form submission
-            }
-        }
-
-        var receiptUrl = '/receipt';
-        if (selectedPaymentMethod === 'credit-card') {
-            receiptUrl += '?method=credit-card';
-        } else if (selectedPaymentMethod === 'cash-on-delivery') {
-            receiptUrl += '?method=cash-on-delivery';
-        } else if (selectedPaymentMethod === 'bank-transfer') {
-            var bankSelection = document.getElementById('bank-selection').value;
-            receiptUrl += '?method=bank-transfer&bank=' + encodeURIComponent(bankSelection);
-        }
-
-        console.log('Redirecting to:', receiptUrl);
-        window.location.href = receiptUrl; // Redirect to receipt page
     });
 </script>
 </body>
